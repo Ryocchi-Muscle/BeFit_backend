@@ -115,3 +115,10 @@ Twitter や mattermost、Qitta 等で宣伝し、ユーザー獲得を行う予�
 第 1 段階：開発に慣れる& render デプロイ<br>
 第 2 段階：テスト、インフラの AWS 化と Docker の導入と CI/CD の導入をおこなう予定です。<br>
 第 3 段階：追加で必要そうな機能(高度な機能)のチャレンジを行なっていく予定です。<br>
+
+## ■ 画面遷移図<br>
+
+Figma：https://www.figma.com/file/nGPYGIh8IXzliZafhJxrzf/PF-3%2F9?type=design&node-id=0%3A1&mode=design&t=vkvG9u5hJ7tX2RlN-1<br>
+
+## ■ ER図<br>
+https://drive.google.com/file/d/1Ee7QTfIJnDDzuYfnZJH_fcJclKbBpP2r/view?usp=sharing<br>
