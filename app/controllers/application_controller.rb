@@ -30,6 +30,7 @@ class ApplicationController < ActionController::API
   end
 
   private
+
     def set_todo
       @todo = Todo.find(params[:id])
     end
