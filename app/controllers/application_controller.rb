@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-    # GET /todos
+  # GET /todos
   def index
     @todos = Todo.all
     render json: @todos
