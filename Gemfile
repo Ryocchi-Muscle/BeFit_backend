@@ -10,6 +10,7 @@ gem 'rails', '~> 7.0.8', '>= 7.0.8.1'
 gem "mysql2", "~> 0.5"
 gem "dotenv-rails"
 gem 'rack-cors'
+gem 'bcrypt', '~> 3.1.7' # Use Active Model has_secure_password
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
