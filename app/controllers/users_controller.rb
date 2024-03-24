@@ -14,16 +14,18 @@ class UserController < ApplicationController
   #     params.require(:user).permit(:email, :password, :password_confirmation)
   #   end
 
+  skip_before_action :verify_authenticity_token, only: [:guest_login]
+
   def guest_login
-    User.find_or_create_by!(email: 'guest@example.com') do |new_user|
-      new_user.password = SecureRandom.urlsafe_base64
+    user = User.find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
     end
 
-    token = encode_jwt_token_for(user)
+    token = encode_jwt_token_for(new_user)
     render json: { token: token }
   end
 
-  def encode_jwt_token_for(new_user)
-    
+  def encode_jwt_token_for(user)
+
   end
 end
