@@ -12,7 +12,7 @@ gem "dotenv-rails"
 gem 'rack-cors'
 gem 'bcrypt', '~> 3.1.7' # Use Active Model has_secure_password
 gem 'jwt'
-
+gem 'active_model_serializers' # Use Active Model Serializers
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 
