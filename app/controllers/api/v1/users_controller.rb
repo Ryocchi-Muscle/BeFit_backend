@@ -1,9 +1,7 @@
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:guest_login]
-
   def create
     # 引数の条件に該当するデータがあればそれを返す。なければ新規作成する
-    user = User.find_or_create_by(provider: params[:provider], uid: params[:uid], name: params[:name], email: params[:email])
+    user = User.find_or_create_by(provider: params[:provider], uid: params[:uid], name: params[:name])
     if user
       head :ok
     else
