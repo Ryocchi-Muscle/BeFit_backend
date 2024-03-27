@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   resources :users, only: [:create]
   # post '/guest_login', to: 'users#guest_login'
   post 'auth/:provider/callback', to: 'api/v1/users#create'
-  delete '/users/:id', to: 'api/v1/users#destroy'
+  delete '/users/:uid', to: 'api/v1/users#destroy'
 end
