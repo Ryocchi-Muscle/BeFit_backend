@@ -51,7 +51,4 @@ test:
 #
 production:
   <<: *default
-  database: fitapp_api_production
-  username: fitapp_api
-  password: <%= ENV["FITAPP_API_DATABASE_PASSWORD"] %>
   url: <%= ENV['JAWSDB_URL'] %>
