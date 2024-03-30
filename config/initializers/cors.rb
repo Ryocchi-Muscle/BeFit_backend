@@ -7,9 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    # origins "http://localhost:3001" #dev # Next.jsのサーバーのURLを設定
-    origins 'https://fitapp-frontend-y589.vercel.app' 
-
+  origins 'http://localhost:3001', 'https://fitapp-frontend-y589.vercel.app'
     resource "*",
              headers: :any,
              methods: [:get, :post, :put, :patch, :delete, :options, :head]
