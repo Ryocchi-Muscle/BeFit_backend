@@ -56,4 +56,4 @@ production:
   username: <%= ENV['MYSQL_USERNAME'] %>
   password: <%= ENV['MYSQL_PASSWORD'] %>
   host: <%= ENV['MYSQL_HOST'] %>
-  url: <%= ENV['MYSQL_URL'] %>
+
