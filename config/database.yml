@@ -51,4 +51,9 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV['JAWSDB_URL'] %>
+  database: <%= ENV['MYSQL_DATABASE'] %>
+  url: <%= ENV['MYSQL_URL'] %>
+  username: <%= ENV['MYSQL_USERNAME'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
+  host: <%= ENV['MYSQL_HOST'] %>
+  url: <%= ENV['MYSQL_URL'] %>
