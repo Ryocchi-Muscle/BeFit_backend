@@ -4,11 +4,19 @@ class ApplicationController < ActionController::API
   private
 
     def authenticate_user!
-      token = request.headers['Authorization'].split.last
-      payload = decode_jwt(token)
-      @current_user = User.find_by(uid: payload['uid'])
+      authorization_header = request.headers['Authorization']
 
-      render json: { error: 'Not Authorized' }, status: :unauthorized unless @current_user
+      if authorization_header.present?
+        token = authorization_header.split.last
+        payload = decode_jwt(token)
+        @current_user = User.find_by(id: payload['sub'])
+
+        unless @current_user
+          render json: { error: 'Not Authorized' }, status: :unauthorized
+        end
+      else
+        render json: { error: 'Authorization token missing' }, status: :unauthorized
+      end
     end
 
     def decode_jwt(token)
