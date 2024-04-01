@@ -14,7 +14,7 @@ class TrainingRecordsController < ApplicationController
   def create
     @training_record = TrainingRecord.new(training_record_params)
     if @training_record.save
-      render json: @training_record, status: :created, location: @training_record
+      render json: @training_record, status: :created
     else
       render json: @training_record.errors, status: :unprocessable_entity
     end
