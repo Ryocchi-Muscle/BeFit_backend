@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
       if authorization_header.present?
         token = authorization_header.split.last
         payload = decode_jwt(token)
-        @current_user = User.find_by(id: payload['sub'])
+        @current_user = User.find_by(id: payload['uid'])
 
         unless @current_user
           render json: { error: 'Not Authorized' }, status: :unauthorized
