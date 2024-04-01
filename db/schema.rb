@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_31_102332) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_01_021604) do
   create_table "todos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.boolean "completed"
@@ -30,6 +30,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_102332) do
     t.index ["user_id"], name: "index_training_records_on_user_id"
   end
 
+  create_table "training_sets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "training_record_id", null: false
+    t.integer "weight"
+    t.integer "reps"
+    t.boolean "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_record_id"], name: "index_training_sets_on_training_record_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "uid"
     t.string "name"
@@ -39,4 +49,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_102332) do
   end
 
   add_foreign_key "training_records", "users"
+  add_foreign_key "training_sets", "training_records"
 end
