@@ -30,7 +30,7 @@ class TrainingRecordsController < ApplicationController
 
   def destroy
     @training_record.destroy
-    head :no_content #削除が成功した場合にはステータスコード204（No Content）を返す
+    head :no_content # 削除が成功した場合にはステータスコード204（No Content）を返す
   end
 
   private
