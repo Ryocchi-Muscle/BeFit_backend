@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_01_021604) do
     t.string "menu"
     t.integer "set"
     t.integer "weight"
+    t.integer "reps"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_training_records_on_user_id"
