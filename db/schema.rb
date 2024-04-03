@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_01_021604) do
 
   create_table "training_sets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "training_record_id", null: false
+    t.integer "set_number"
     t.integer "weight"
     t.integer "reps"
     t.boolean "completed"
