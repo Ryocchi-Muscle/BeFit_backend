@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_03_130016) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_07_054206) do
   create_table "exercises", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "training_day_id", null: false
     t.string "name"
@@ -46,6 +46,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_03_130016) do
     t.index ["user_id"], name: "index_training_days_on_user_id"
   end
 
+  create_table "training_menus", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "body_part"
+    t.string "exercise_name"
+    t.bigint "training_day_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_day_id"], name: "index_training_menus_on_training_day_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "uid"
     t.string "name"
@@ -57,4 +66,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_03_130016) do
   add_foreign_key "exercises", "training_days"
   add_foreign_key "sets", "exercises"
   add_foreign_key "training_days", "users"
+  add_foreign_key "training_menus", "training_days"
 end

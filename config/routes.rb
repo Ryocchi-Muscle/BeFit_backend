@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :training_days do
         resources :training_records
-        delete '/users/:uid', to: 'users#destroy'
       end
+      delete '/users/:uid', to: 'users#destroy'
     end
   end
 end
