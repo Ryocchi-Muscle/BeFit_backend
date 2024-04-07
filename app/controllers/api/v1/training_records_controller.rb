@@ -1,6 +1,5 @@
 class TrainingRecordsController < ApplicationController
   before_action :set_training_record, only: [:update, :destroy]
-  # GET /todos
   def index
     @training_records = if params[:date]
                           current_user.training_records.where(date: params[:date])
