@@ -1,5 +1,13 @@
 class Api::V1::TrainingMenusController < ApplicationController
-  def create; end
+  def create
+    @training_menu = @training_day.training_menus.new(training_menu_params)
+
+    if @training_menu.save
+      render json: @training_menu, status: :created,  location: @training_menu
+    else
+      render json: @training_menu.errors, status: :unprocessable_entity
+    end
+  end
 
   private
 
