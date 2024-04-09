@@ -10,25 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_07_054206) do
-  create_table "exercises", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "training_day_id", null: false
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "body_part"
-    t.index ["training_day_id"], name: "index_exercises_on_training_day_id"
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2024_04_09_125257) do
   create_table "sets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "exercise_id", null: false
+    t.bigint "training_menus_id", null: false
     t.integer "set_number"
     t.integer "weight"
     t.integer "reps"
     t.boolean "completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["exercise_id"], name: "index_sets_on_exercise_id"
+    t.bigint "training_menu_id", null: false
+    t.index ["training_menu_id"], name: "index_sets_on_training_menu_id"
+    t.index ["training_menus_id"], name: "index_sets_on_training_menus_id"
   end
 
   create_table "todos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -63,8 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_054206) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "exercises", "training_days"
-  add_foreign_key "sets", "exercises"
+  add_foreign_key "sets", "training_menus"
   add_foreign_key "training_days", "users"
   add_foreign_key "training_menus", "training_days"
 end
