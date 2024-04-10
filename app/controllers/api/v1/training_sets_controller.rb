@@ -1,2 +1,2 @@
-class TrainingSetsController < ApplicationController
+class Api::V1::TrainingSetsController < ApplicationController
 end
