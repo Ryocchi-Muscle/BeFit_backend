@@ -1,11 +1,12 @@
 class Api::V1::TrainingMenusController < ApplicationController
   def create
-    @training_menu = @training_day.training_menus.new(training_menu_params)
+    training_day = TrainingDay.find(params[:training_day_id])
+    training_menu = training_day.training_menus.new(training_menu_params)
 
-    if @training_menu.save
-      render json: @training_menu, status: :created,  location: @training_menu
+    if training_menu.save
+      render json: training_menu, status: :created
     else
-      render json: @training_menu.errors, status: :unprocessable_entity
+      render json: training_menu.errors, status: :unprocessable_entity
     end
   end
 
