@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_09_130216) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_10_122236) do
   create_table "sets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "set_number"
     t.integer "weight"
@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_09_130216) do
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["date"], name: "index_training_days_on_date", unique: true
     t.index ["user_id"], name: "index_training_days_on_user_id"
   end
 
