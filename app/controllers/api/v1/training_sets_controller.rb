@@ -32,6 +32,11 @@ class Api::V1::TrainingSetsController < ApplicationController
     render json: training_sets
   end
 
+  def show
+    training_set = TrainingSet.find(params[:id])
+    render json: training_set
+  end
+
   private
 
     def training_set_params
