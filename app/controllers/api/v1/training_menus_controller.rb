@@ -1,5 +1,4 @@
 class Api::V1::TrainingMenusController < ApplicationController
-
   # 特定のトレーニング日に新しいトレーニングメニューを追加
   def create
     training_day = TrainingDay.find(params[:training_day_id])
@@ -44,6 +43,7 @@ class Api::V1::TrainingMenusController < ApplicationController
   end
 
   private
+
     def training_menu_params
       params.require(:training_menu).permit(
         :body_part,
