@@ -1,8 +1,11 @@
 class Api::V1::TrainingSetsController < ApplicationController
-  def create
-    training_menu = TrainingMenu.find(params[:training_menu_id])
-    training_set = training_menu.training_sets.new(training_set_params)
+  before_action :authenticate_user!
+  before_action :set_training_menu, only: [:index, :create]
+  before_action :set_training_set, only: [:show, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
+  def create
+    training_set = @training_menu.training_sets.new(training_set_params)
     if training_set.save
       render json: training_set, status: :created
     else
@@ -11,35 +14,44 @@ class Api::V1::TrainingSetsController < ApplicationController
   end
 
   def update
-    training_set = TrainingSet.find(params[:id])
-
-    if training_set.update(training_set_params)
-      render json: training_set
+    if @training_set.update(training_set_params)
+      render json: @training_set
     else
-      render json: training_set.errors, status: :unprocessable_entity
+      render json: @training_set.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    training_set = TrainingSet.find(params[:id])
-    training_set.destroy
-    head :no_content
+    if @training_set.destroy
+      head :no_content
+    else
+      render json: { error: "削除失敗" }, status: :unprocessable_entity
+    end
   end
 
   def index
-    training_menu = trainingMenu.find(params[:training_menu_id])
-    training_sets = training_menu.training_sets
-    render json: training_sets
+    render json: @training_menu.training_sets
   end
 
   def show
-    training_set = TrainingSet.find(params[:id])
-    render json: training_set
+    render json: @training_set
   end
 
   private
 
+    def set_training_menu
+      @training_menu = TrainingMenu.find(params[:training_menu_id])
+    end
+
+    def set_training_set
+      @training_set = TrainingSet.find(params[:id])
+    end
+
     def training_set_params
       params.require(:training_set).permit(:set_number, :weight, :reps, :completed)
+    end
+
+    def record_not_found
+      render json: { error: "レコードが見つからないよ" }, status: :not_found
     end
 end
