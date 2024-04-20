@@ -1,5 +1,5 @@
 class Api::V1::TrainingSetsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :set_training_menu, only: [:index, :create]
   before_action :set_training_set, only: [:show, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
