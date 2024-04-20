@@ -10,6 +10,7 @@ class Api::V1::TrainingDaysController < ApplicationController
   end
 
   def create
+    pp "current_user: #{current_user}"
     @training_day = current_user.training_days.build(training_day_params)
     if @training_day.save
       render json: @training_day, status: :created
