@@ -1,4 +1,6 @@
 class Api::V1::TrainingDaysController < ApplicationController
+  before_action :set_current_user
+
   def index
     @training_days = current_user.training_days
     render json: @training_days
@@ -10,7 +12,7 @@ class Api::V1::TrainingDaysController < ApplicationController
   end
 
   def create
-    pp "current_user: #{current_user}"
+    Rails.logger.debug("current_user: #{current_user}")
     @training_day = current_user.training_days.build(training_day_params)
     if @training_day.save
       render json: @training_day, status: :created
