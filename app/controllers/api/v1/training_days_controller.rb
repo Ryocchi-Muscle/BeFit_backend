@@ -24,6 +24,6 @@ class Api::V1::TrainingDaysController < ApplicationController
   private
 
     def training_day_params
-      params.require(:training_day).permit(:date)
+      params.require(:training_day).permit(:date, menu: [:bodyPart, :exerciseName, sets: [:setNumber, :weight, :reps, :completed]])
     end
 end
