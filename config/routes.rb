@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'training_sessions/show'
+  get 'training_sessions/create'
+  get 'training_sessions/update'
   post 'auth/:provider/callback', to: 'api/v1/users#create'
   namespace :api do
     namespace :v1 do
