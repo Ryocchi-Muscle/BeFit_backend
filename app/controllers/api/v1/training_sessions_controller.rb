@@ -5,7 +5,7 @@ class TrainingSessionsController < ApplicationController
     training_session = TrainingSession.find(params[:id])
     render json: {
       training_session: training_session,
-      elapesd_days: training_session.elapesd_days,
+      elapsed_days: training_session.elapsed_days,
       remaining_days: training_session.remaining_days
     }
   end
