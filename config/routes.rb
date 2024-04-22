@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   post 'auth/:provider/callback', to: 'api/v1/users#create'
   namespace :api do
-    namespace :v1 do # config/routes.rb
+    namespace :v1 do
       resources :training_sessions, only: [:show, :create, :update]
 
       resources :training_days do
