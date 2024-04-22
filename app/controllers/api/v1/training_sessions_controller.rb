@@ -1,4 +1,4 @@
-class TrainingSessionsController < ApplicationController
+class Api::V1::TrainingSessionsController < ApplicationController
   before_action :set_training_session, only: [:show, :update]
 
   def show
