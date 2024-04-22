@@ -35,14 +35,10 @@ class Api::V1::TrainingSessionsController < ApplicationController
         return
       end
 
-      @user = User.find_by(id: params[:user_id])
-      if @user
-        @training_session = @user.training_sessions.find(params[:id])
-      else
-        render json: { error: 'User not found' }, status: :not_found
-      end
-
       @training_session = current_user.training_sessions.find(params[:id])
+      return if @training_session
+
+      render json: { error: 'Training session not found' }, status: :not_found
     end
 
     def training_session_params

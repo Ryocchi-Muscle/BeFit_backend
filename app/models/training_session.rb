@@ -3,7 +3,7 @@ class TrainingSession < ApplicationRecord
   validates :start_date, presence: true
 
   # トレーニングセッションが開始してから経過した日数を計算するメソッド
-  def elapesd_days
+  def elapsed_day
     return 0 if Date.today < start_date
 
     (Date.today - start_date).to_i + 1
