@@ -1,5 +1,5 @@
 class TrainingSessionsController < ApplicationController
-  before action :set_training_session, only: [:show, :update]
+  before_action :set_training_session, only: [:show, :update]
 
   def show
     training_session = TrainingSession.find(params[:id])
