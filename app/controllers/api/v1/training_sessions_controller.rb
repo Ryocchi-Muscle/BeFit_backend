@@ -1,7 +1,8 @@
 class Api::V1::TrainingSessionsController < ApplicationController
-  before_action :set_training_session, only: [:show, :update]
+  before_action  :set_current_user, :set_training_session, only: [:show, :update]
 
   def show
+         Rails.logger.debug("current_user: #{current_user}")
     render json: {
       training_session: @training_session,
       elapsed_days: @training_session.elapsed_days,
@@ -29,6 +30,11 @@ class Api::V1::TrainingSessionsController < ApplicationController
   private
 
     def set_training_session
+      unless current_user
+        render json: { error: 'Unauthorized' }, status: :unauthorized
+        return
+      end
+
       @training_session = current_user.training_sessions.find(params[:id])
     end
 
