@@ -2,7 +2,12 @@ class TrainingSessionsController < ApplicationController
   before action :set_training_session, only: [:show, :update]
 
   def show
-    render json: @training_session
+    training_session = TrainingSession.find(params[:id])
+    render json: {
+      training_session: training_session,
+      elapesd_days: training_session.elapesd_days,
+      remaining_days: training_session.remaining_days
+    }
   end
 
   def create
