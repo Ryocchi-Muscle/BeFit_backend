@@ -5,8 +5,7 @@ class Api::V1::TrainingSessionsController < ApplicationController
     Rails.logger.debug("current_user: #{current_user}")
     render json: {
       training_session: @training_session,
-      elapsed_days: @training_session.elapsed_days,
-      remaining_days: @training_session.remaining_days
+      days_info: @training_session.calculate_days
     }
   end
 
