@@ -3,6 +3,8 @@ class Api::V1::TrainingSessionsController < ApplicationController
 
   def show
     Rails.logger.debug("current_user: #{current_user}")
+    Rails.logger.debug("training_session: #{@training_session}")
+    Rails.logger.debug("days_info: #{@training_session.calculate_days}")
     render json: {
       training_session: @training_session,
       days_info: @training_session.calculate_days
@@ -35,6 +37,7 @@ class Api::V1::TrainingSessionsController < ApplicationController
       end
 
       @training_session = current_user.training_sessions.find(params[:id])
+      Rails.logger.debug("training_session: #{@training_session}")
       return if @training_session
 
       render json: { error: 'Training session not found' }, status: :not_found
