@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   delete '/users/:uid', to: 'users#destroy'
   namespace :api do
     namespace :v2 do
-      resources :training_records
+      resources :training_records, only: [:create]
     end
   end
 end
