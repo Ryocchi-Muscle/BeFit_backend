@@ -1,15 +1,9 @@
 Rails.application.routes.draw do
   post 'auth/:provider/callback', to: 'api/v1/users#create'
+  delete '/users/:uid', to: 'users#destroy'
   namespace :api do
-    namespace :v1 do
-      resources :training_sessions, only: [:show, :create, :update]
-
-      resources :training_days do
-        resources :training_menus do
-          resources :training_sets
-        end
-      end
-      delete '/users/:uid', to: 'users#destroy'
+    namespace :v2 do
+      resources :training_records
     end
   end
 end
