@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:3001', 'https://fitapp-frontend-jet.vercel.app'
+    origins 'http://localhost:3001', 'https://fitapp-frontend-jet.vercel.app', 'https://fitapp-frontendv2.vercel.app'
     resource "*",
              headers: :any,
              expose: %w[access-token uid client],
