@@ -21,6 +21,6 @@ module Api
   end
 end
 
-current_user.training_sessions.new!(start_date: Date.today)
+# current_user.training_sessions.new!(start_date: Date.today)
 
 save
