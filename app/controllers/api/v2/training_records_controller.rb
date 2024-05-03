@@ -6,34 +6,43 @@ class Api::V2::TrainingRecordsController < ApplicationController
     Rails.logger.debug("Received params: #{params.inspect}")
     ActiveRecord::Base.transaction do
       training_day = TrainingDay.find_or_initialize_by(date: params[:date])
-
-      if current_user
-        training_day.user_id = current_user.id
-      end
-       Rails.logger.debug("training_day13: #{training_day.inspect}")
-
-      if training_day.save
+      begin
         Rails.logger.debug("training_day: #{training_day.inspect}")
-        params[:menus].each do |menu|
-          Rails.logger.debug("menu: #{menu.inspect}")
-          training_menu = training_day.training_menus.find_or_initialize_by(exercise_name: menu[:menuName])
-          Rails.logger.debug("training_menu: #{training_menu.inspect}")
-          menu[:sets].each do |set|
-            training_set = training_menu.training_sets.find_or_initialize_by(set_number: set[:setId])
-            training_set.update(weight: set[:weight], reps: set[:reps], completed: set[:completed])
-          end
-          training_menu.save!
-        end
-        render json: { status: 'success' }
+        training_day.user_id = current_user.id if current_user
+        training_day.save!
+      rescue StandardError => e
+        Rails.logger.error("An error occurred: #{e.message}")
+        render json: { status: 'error', message: e.message }, status: :internal_server_error # 500
       end
+
+      params[:menus].each do |menu|
+        training_menu = training_day.training_menus.find_or_initialize_by(exercise_name: menu[:menuName])
+        Rails.logger.debug("training_day: #{training_day.inspect}")
+        menu[:sets].each do |set|
+          training_set = training_menu.training_sets.find_or_initialize_by(set_number: set[:setId])
+          training_set.update(weight: set[:weight], reps: set[:reps], completed: set[:completed])
+          Rails.logger.debug("training_set: #{training_set.inspect}")
+          Rails.logger.debug("training_set.attributes: #{training_set.attributes}")
+          training_set.save!
+        end
+        Rails.logger.debug("training_menu: #{training_menu.inspect}")
+        training_menu.save!
+      end
+
+      render json: { status: 'success' }
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { status: 'error', errors: e.record.errors.full_messages }, status: :unprocessable_entity # 422
+      raise ActiveRecord::Rollback
     end
-  rescue StandardError => e
-    render json: { status: 'error', message: e.message }
   end
+
+  # rescue StandardError => e
+  #   render json: { status: 'error', message: e.message }, status: :internal_server_error # 500
+  # end
 
   private
 
     def training_day_params
-      params.require(:training_day).permit(:date, menus: [:menuId, :munuName, { sets: [:setId, :weight, :reps, :completed] }])
+      params.require(:training_day).permit(:date, menus: [:menuId, :menuName, { sets: [:setId, :weight, :reps, :completed] }])
     end
 end
