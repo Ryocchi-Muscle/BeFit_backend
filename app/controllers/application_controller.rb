@@ -12,7 +12,7 @@ class ApplicationController < ActionController::API
 
     def set_current_user
       received_access_token = request.headers["Authorization"]&.split&.last
-      Rails.logger.debug("received_access_token: #{received_access_token}")
+      # Rails.logger.debug("received_access_token: #{received_access_token}")
 
       if session[:user_id] && session[:access_token] == received_access_token
         # セッションからユーザー情報を取得
