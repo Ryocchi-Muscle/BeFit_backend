@@ -2,6 +2,20 @@
 class Api::V2::TrainingRecordsController < ApplicationController
   before_action :set_current_user
 
+  def show
+    date = params[:id]
+    training_day = TrainingDay.find_by(date: date, user_id: current_user.id)
+
+    if training_day
+      training_menus = training_day.training_menus.includes(:training_sets)
+      render json: training_menus.as_json(include: { training_sets: { except: [:created_at, :updated_at] } }),
+             status: :ok # 200
+      Rails.logger.debug("training_menus: #{training_menus.inspect}")
+    else
+      render json: { status: 'error', message: 'Record not found' }, status: :not_found # 404
+    end
+  end
+
   def create
     Rails.logger.debug("Received params: #{params.inspect}")
     ActiveRecord::Base.transaction do
