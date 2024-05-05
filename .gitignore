@@ -30,4 +30,5 @@
 .env
 .DS_Store
 # データベースバックアップ
-backup.sql
+backup_dev.sql
+backup_pro.sql
