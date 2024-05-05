@@ -50,10 +50,6 @@ class Api::V2::TrainingRecordsController < ApplicationController
     end
   end
 
-  # rescue StandardError => e
-  #   render json: { status: 'error', message: e.message }, status: :internal_server_error # 500
-  # end
-
   private
 
     def training_day_params
