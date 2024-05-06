@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_20_080331) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_02_130813) do
   create_table "todos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.boolean "completed"
@@ -18,4 +18,52 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_20_080331) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "training_days", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "date"], name: "index_training_days_on_user_id_and_date", unique: true
+    t.index ["user_id"], name: "index_training_days_on_user_id"
+  end
+
+  create_table "training_menus", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "body_part"
+    t.string "exercise_name"
+    t.bigint "training_day_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_day_id"], name: "index_training_menus_on_training_day_id"
+  end
+
+  create_table "training_sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "start_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_training_sessions_on_user_id"
+  end
+
+  create_table "training_sets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "set_number"
+    t.integer "weight"
+    t.integer "reps"
+    t.boolean "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "training_menu_id", null: false
+    t.index ["training_menu_id"], name: "index_training_sets_on_training_menu_id"
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "uid"
+    t.string "name"
+    t.string "provider"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "training_days", "users"
+  add_foreign_key "training_menus", "training_days"
+  add_foreign_key "training_sets", "training_menus"
 end

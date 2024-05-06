@@ -7,10 +7,12 @@ ruby '3.2.2'
 gem 'rails', '~> 7.0.8', '>= 7.0.8.1'
 
 # Use mysql as the database for Active Record
-gem "mysql2", "~> 0.5"
+gem "mysql2"
 gem "dotenv-rails"
 gem 'rack-cors'
-
+gem 'bcrypt', '~> 3.1.7' # Use Active Model has_secure_password
+gem 'jwt'
+gem 'active_model_serializers' # Use Active Model Serializers
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 

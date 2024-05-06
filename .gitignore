@@ -29,3 +29,7 @@
 /config/master.key
 .env
 .DS_Store
+# データベースバックアップ
+backup_dev.sql
+backup_pro.sql
+.DS_Store
