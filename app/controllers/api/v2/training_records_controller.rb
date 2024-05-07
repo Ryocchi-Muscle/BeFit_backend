@@ -59,7 +59,7 @@ class Api::V2::TrainingRecordsController < ApplicationController
     start_date = params[:date].to_date.beginning_of_week(:sunday)
     end_date = start_date.end_of_week(:sunday)
 
-    current_week_weight = TrainingDay.where(date: start_date...end_date).joins(training_menus: :training_sets).sum(
+    current_week_weight = TrainingDay.where(date: start_date...end_date, user_id: current_user.id).joins(training_menus: :training_sets).sum(
       'training_sets.weight * training_sets.reps'
     )
 
