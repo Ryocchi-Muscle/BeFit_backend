@@ -32,3 +32,4 @@
 # データベースバックアップ
 backup_dev.sql
 backup_pro.sql
+.DS_Store
