@@ -1,4 +1,3 @@
-# app/controllers/api/v2/training_records_controller.rb
 class Api::V2::TrainingRecordsController < ApplicationController
   before_action :set_current_user
 
@@ -41,7 +40,7 @@ class Api::V2::TrainingRecordsController < ApplicationController
         training_menu.training_sets.where(id: existing_sets - client_set_ids).destroy_all
 
         menu[:sets].each do |set|
-          training_set = training_menu.training_sets.find_or_initialize_by(id: set[:setId])
+          training_set = training_menu.training_sets.find_or_initialize_by(set_number: set[:setNumber])
           training_set.update(set_number: set[:setNumber], weight: set[:weight], reps: set[:reps], completed: set[:completed])
           training_set.save!
         end
@@ -59,7 +58,7 @@ class Api::V2::TrainingRecordsController < ApplicationController
     start_date = params[:date].to_date.beginning_of_week(:sunday)
     end_date = start_date.end_of_week(:sunday)
 
-    current_week_weight = TrainingDay.where(date: start_date...end_date).joins(training_menus: :training_sets).sum(
+    current_week_weight = TrainingDay.where(date: start_date...end_date, user_id: current_user.id).joins(training_menus: :training_sets).sum(
       'training_sets.weight * training_sets.reps'
     )
 

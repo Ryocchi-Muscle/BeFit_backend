@@ -11,8 +11,9 @@ class ApplicationController < ActionController::API
   private
 
     def set_current_user
+      Rails.logger.debug("request.headers: #{request.headers}")
       received_access_token = request.headers["Authorization"]&.split&.last
-      # Rails.logger.debug("received_access_token: #{received_access_token}")
+      Rails.logger.debug("received_access_token1: #{received_access_token}")
 
       if session[:user_id] && session[:access_token] == received_access_token
         # セッションからユーザー情報を取得
@@ -23,7 +24,7 @@ class ApplicationController < ActionController::API
         session.delete(:access_token)
 
         # Google APIからユーザー情報を取得
-        Rails.logger.debug("received_access_token: #{received_access_token}")
+        Rails.logger.debug("received_access_token2: #{received_access_token}")
         user_info = fetch_user_info_from_google(received_access_token)
         Rails.logger.debug("user_info: #{user_info}")
 
