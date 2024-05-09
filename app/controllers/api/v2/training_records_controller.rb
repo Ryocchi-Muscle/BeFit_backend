@@ -29,9 +29,9 @@ class Api::V2::TrainingRecordsController < ApplicationController
       training_day.training_menus.where(id: existing_menus_ids - client_menu_ids).destroy_all
 
       params[:menus].each do |menu|
-        training_menu = training_day.training_menus.find_or_initialize_by(exercise_name: menu[:menuName])
+        training_menu = training_day.training_menus.find_or_initialize_by(exercise_name: menu[:menuName], body_part: menu[:body_part])
         Rails.logger.debug("training_menu: #{training_menu.inspect}")
-        training_menu.update(exercise_name: menu[:menuName])
+        training_menu.update(exercise_name: menu[:menuName], body_part: menu[:body_part])
 
         # 存在するセットIDを取得
         existing_sets = training_menu.training_sets.pluck(:id)
@@ -68,6 +68,6 @@ class Api::V2::TrainingRecordsController < ApplicationController
   private
 
     def training_day_params
-      params.require(:training_day).permit(:date, menus: [:menuId, :menuName, { sets: [:setId, :weight, :reps, :completed] }])
+      params.require(:training_day).permit(:date, menus: [:menuId, :menuName, :body_part, { sets: [:setId, :weight, :reps, :completed] }])
     end
 end
