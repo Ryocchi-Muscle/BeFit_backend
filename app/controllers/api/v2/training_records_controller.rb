@@ -1,6 +1,11 @@
 class Api::V2::TrainingRecordsController < ApplicationController
   before_action :set_current_user
 
+def index
+  training_days = TrainingDay.where(user_id: current_user.id).order(:date)
+  render json: training_days, each_serializer: TrainingDaySerializer
+end
+
   def show
     date = params[:id]
     training_day = TrainingDay.find_by(date: date, user_id: current_user.id)
