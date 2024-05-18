@@ -2,7 +2,6 @@ require 'net/http'
 require 'uri'
 require 'json'
 
-# ApplicationController
 class ApplicationController < ActionController::API
   include ActionController::Cookies
 
