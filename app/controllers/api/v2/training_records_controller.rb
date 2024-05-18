@@ -1,10 +1,10 @@
 class Api::V2::TrainingRecordsController < ApplicationController
   before_action :set_current_user
 
-def index
-  training_days = TrainingDay.where(user_id: current_user.id).order(:date)
-  render json: training_days, each_serializer: TrainingDaySerializer
-end
+  def index
+    training_days = TrainingDay.where(user_id: current_user.id).order(:date)
+    render json: training_days, each_serializer: TrainingDaySerializer
+  end
 
   def show
     date = params[:id]
@@ -35,8 +35,21 @@ end
 
       params[:menus].each do |menu|
         training_menu = training_day.training_menus.find_or_initialize_by(exercise_name: menu[:menuName], body_part: menu[:body_part])
-        Rails.logger.debug("training_menu: #{training_menu.inspect}")
-        training_menu.update(exercise_name: menu[:menuName], body_part: menu[:body_part])
+        Rails.logger.debug("training_menu (before save!): #{training_menu.inspect}")
+        # training_menu.update!(exercise_name: menu[:menuName], body_part: menu[:body_part])
+
+        begin
+          if training_menu.new_record?
+            training_menu.save!
+          else
+            training_menu.update!(exercise_name: menu[:menuName], body_part: menu[:body_part])
+          end
+        rescue ActiveRecord::RecordInvalid => e
+          Rails.loggerdebug("training_menu.errors: #{e.training_menu.errors.full_messages}")
+          raise ActiveRecord::Rollback
+        end
+
+        Rails.logger.debug("training_menu (after save!): #{training_menu.inspect}")
 
         # 存在するセットIDを取得
         existing_sets = training_menu.training_sets.pluck(:id)
@@ -46,10 +59,10 @@ end
 
         menu[:sets].each do |set|
           training_set = training_menu.training_sets.find_or_initialize_by(set_number: set[:setNumber])
-          training_set.update(set_number: set[:setNumber], weight: set[:weight], reps: set[:reps], completed: set[:completed])
+          training_set.update!(set_number: set[:setNumber], weight: set[:weight], reps: set[:reps], completed: set[:completed])
           training_set.save!
+          Rails.logger.debug("training_set (after save!): #{training_set.inspect}")
         end
-        training_menu.save!
       end
 
       render json: { status: 'success' }
