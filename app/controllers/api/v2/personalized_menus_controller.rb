@@ -21,7 +21,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
         when '1'
           [
             {
-              title: "週に1回のプログラム",
+              title: "週に1回のプログラム①",
               image: "#{base_url}/images/images.jpeg",
               details: [
                 "スクワット: 10回3セット, インターバル3分",
@@ -29,6 +29,13 @@ class Api::V2::PersonalizedMenusController < ApplicationController
                 "ベンチプレス: 10回3セット, インターバル3分 (時間なければ2分)",
                 "ベンチプレス: メインセットから重量を15%落として限界まで1セット, インターバル1分",
                 "デッドリフト: 10回2セット, インターバル3分",
+
+              ]
+            },
+                {
+              title: "週に1回のプログラム ②",
+              image: "#{base_url}/images/program_2_3_B.jpg", # 必要に応じて画像のパスを変更
+              details: [
                 "懸垂: インターバル3分",
                 "サイドレイズ: 12回3セット, インターバル1分",
                 "アブローラー: 2セット, インターバル2分",
@@ -120,10 +127,10 @@ class Api::V2::PersonalizedMenusController < ApplicationController
         end
       when 'female'
         case frequency
-        when '1'
+         when '1'
           [
             {
-              title: "週に1回のプログラム",
+              title: "週に1回のプログラム①",
               image: "#{base_url}/images/images.jpeg",
               details: [
                 "スクワット: 10回3セット, インターバル3分",
@@ -131,6 +138,13 @@ class Api::V2::PersonalizedMenusController < ApplicationController
                 "ベンチプレス: 10回3セット, インターバル3分 (時間なければ2分)",
                 "ベンチプレス: メインセットから重量を15%落として限界まで1セット, インターバル1分",
                 "デッドリフト: 10回2セット, インターバル3分",
+
+              ]
+            },
+                {
+              title: "週に1回のプログラム ②",
+              image: "#{base_url}/images/program_2_3_B.jpg", # 必要に応じて画像のパスを変更
+              details: [
                 "懸垂: インターバル3分",
                 "サイドレイズ: 12回3セット, インターバル1分",
                 "アブローラー: 2セット, インターバル2分",
