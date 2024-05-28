@@ -19,7 +19,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
       user.training_programs.by_gender(gender).by_frequency(frequency).by_duration(duration).map do |program|
         {
           title: program.title,
-          details: pgoram.training_menus.map do |menu|
+          details: program.training_menus.map do |menu|
             {
               menu: menu.exercise_name,
               set_info: menu.set_info,
