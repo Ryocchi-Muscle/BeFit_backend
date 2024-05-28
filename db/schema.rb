@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_19_092925) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_28_052708) do
   create_table "todos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.boolean "completed"
@@ -33,7 +33,22 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_19_092925) do
     t.bigint "training_day_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "training_program_id"
+    t.string "set_info"
+    t.string "other"
     t.index ["training_day_id"], name: "index_training_menus_on_training_day_id"
+  end
+
+  create_table "training_programs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title"
+    t.string "image"
+    t.string "gender"
+    t.string "frequency"
+    t.integer "week"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_training_programs_on_user_id"
   end
 
   create_table "training_sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -65,5 +80,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_19_092925) do
 
   add_foreign_key "training_days", "users", on_delete: :cascade
   add_foreign_key "training_menus", "training_days", on_delete: :cascade
+  add_foreign_key "training_programs", "users"
   add_foreign_key "training_sets", "training_menus", on_delete: :cascade
 end
