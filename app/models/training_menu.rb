@@ -6,4 +6,3 @@ class TrainingMenu < ApplicationRecord
   validates :body_part, presence: true
   validates :exercise_name, presence: true
 end
-
