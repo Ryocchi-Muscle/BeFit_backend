@@ -3,7 +3,7 @@ class Api::V2::ProgramsController < ApplicationController
 
   def index
     programs = Program.where(user: @current_user)
-    render json: { programs: programs}
+    render json: { program: programs}
   end
 
   def create
@@ -18,7 +18,6 @@ class Api::V2::ProgramsController < ApplicationController
       ActionController::Parameters.new(p.to_unsafe_h).permit(:week, details: [:menu, :set_info, :other])
     end
 
-    # 例: 各プログラムを個別に保存
     programs = program_params.map do |program_params|
       program = Program.new(program_params)
       program.user = @current_user
