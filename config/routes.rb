@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v2 do
       post 'personalized_menus', to: 'personalized_menus#create'
-      post 'programs', to: 'programs#create'
+      resources 'programs', only: [:index, :create, :destroy]
       resources :training_records, only: [:index, :show, :create, :weekly_summary] do
         get 'weekly_summary', on: :collection
       end
