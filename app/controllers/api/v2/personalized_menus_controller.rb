@@ -15,6 +15,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
   private
 
   def generate_program(gender, frequency, duration)
+
     base_programs = {
       '1' => {
         'male' => [
@@ -168,7 +169,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
 
     program_sequence = case frequency.to_i
     when 1
-      ['A']
+      [nil]
     when 2
       %w[A B]
     when 3
@@ -187,14 +188,15 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     duration.to_i.times do |week|
       program_sequence.each do |prog|
         puts "Accessing base_programs with frequency: #{frequency}, gender: #{gender}, prog: #{prog}"
-        if base_programs[frequency.to_s] && base_programs[frequency.to_s][gender]
-          details = base_programs[frequency.to_s][gender][prog] || []
-          program << { week: week + 1, details: details }
+        if frequency.to_i == 1
+          # frequency が 1 の場合、配列を直接使用
+          details = base_programs[frequency.to_s][gender] || []
         else
-          raise "Invalid program configuration for frequency: #{frequency}, gender: #{gender}"
+          details = base_programs[frequency.to_s][gender][prog] || []
+        end
+         program << { week: week + 1, details: details }
         end
       end
-    end
     program
   end
 end
