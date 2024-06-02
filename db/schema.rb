@@ -10,17 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_01_021002) do
-  create_table "programs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2024_06_02_020802) do
+  create_table "daily_programs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.json "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "day"
+    t.bigint "program_bundle_id", null: false
+    t.integer "week", null: false
+    t.boolean "completed", default: false, null: false
+    t.index ["program_bundle_id", "week", "day"], name: "index_daily_programs_on_bundle_week_day", unique: true
+    t.index ["program_bundle_id"], name: "index_daily_programs_on_program_bundle_id"
+  end
+
+  create_table "program_bundles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "gender"
     t.string "frequency"
     t.integer "duration"
-    t.json "details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "week"
-    t.index ["user_id"], name: "index_programs_on_user_id"
+    t.index ["user_id"], name: "index_program_bundles_on_user_id"
   end
 
   create_table "todos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -45,9 +55,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_01_021002) do
     t.bigint "training_day_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "training_program_id"
     t.string "set_info"
     t.string "other"
+    t.bigint "daily_program_id", null: false
     t.index ["training_day_id"], name: "index_training_menus_on_training_day_id"
   end
 
@@ -78,7 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_01_021002) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "programs", "users"
+  add_foreign_key "program_bundles", "users", on_delete: :cascade
   add_foreign_key "training_days", "users", on_delete: :cascade
   add_foreign_key "training_menus", "training_days", on_delete: :cascade
   add_foreign_key "training_sets", "training_menus", on_delete: :cascade
