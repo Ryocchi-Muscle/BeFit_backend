@@ -2,6 +2,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
   before_action :set_current_user
 
   def create
+    puts "Received params: #{params.inspect}"
     gender = params[:gender]
     frequency = params[:frequency]
     duration = params[:duration]
@@ -185,8 +186,13 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     program = []
     duration.to_i.times do |week|
       program_sequence.each do |prog|
-        details = base_programs[frequency][gender][prog] || []
-        program << { week: week + 1, details: details }
+        puts "Accessing base_programs with frequency: #{frequency}, gender: #{gender}, prog: #{prog}"
+        if base_programs[frequency.to_s] && base_programs[frequency.to_s][gender]
+          details = base_programs[frequency.to_s][gender][prog] || []
+          program << { week: week + 1, details: details }
+        else
+          raise "Invalid program configuration for frequency: #{frequency}, gender: #{gender}"
+        end
       end
     end
     program
