@@ -8,6 +8,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     duration = params[:duration]
 
     program = generate_program(gender, frequency, duration)
+    Rails.logger.debug "Generated program: #{program.inspect}"
 
     program_bundle = ProgramBundle.create(
       user: @current_user,
@@ -15,19 +16,28 @@ class Api::V2::PersonalizedMenusController < ApplicationController
       frequency: frequency,
       duration: duration
     )
+    Rails.logger.debug "Generated program_bundle: #{program_bundle.inspect}"
 
-    program.each do |prog|
-      prog[:details].each do |detail|
-        program_bundle.daily_programs.create(
-          menu: detail[:menu],
-          set_info: detail[:set_info],
-          other: detail[:other],
-          week: prog[:week],
-          day: detail[:day]
-        )
+    if program_bundle.save
+      program.each do |prog|
+        prog[:details].each do |detail|
+          daily_program = program_bundle.daily_programs.create(
+            details: detail.to_json,
+            week: prog[:week],
+            day: detail[:day]
+          )
+          Rails.logger.debug "Created daily_program: #{daily_program.inspect}"
+          unless daily_program.persisted?
+          Rails.logger.error "Failed to save daily_program: #{daily_program.errors.full_messages}"
+          end
+        end
       end
+      Rails.logger.debug "Generated daily_programs: #{program_bundle.daily_programs.inspect}"
+
+    render json: { program: program_bundle, daily_programs: program_bundle.daily_programs }, status: :created
+    else
+      render json: { errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
     end
-    render json: { program: program_bundle }, status: :created
   end
 
   private
