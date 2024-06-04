@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # get 'api/v2/training_records', to: 'api/v2/training_record#index'
   namespace :api do
     namespace :v2 do
-      post 'personalized_menus', to: 'personalized_menus#create'
+      post 'personalized_menus/create_and_save', to: 'personalized_menus#create_and_save'
       resources 'programs', only: [:index, :create, :destroy]
       resources :training_records, only: [:index, :show, :create, :weekly_summary] do
         get 'weekly_summary', on: :collection

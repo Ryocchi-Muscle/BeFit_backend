@@ -28,16 +28,24 @@ class Api::V2::ProgramsController < ApplicationController
         detail.permit(:menu, :set_info, :week, :day)
       end
 
+      Rails.logger.debug "Details Params: #{details_params.inspect}"
+
       daily_programs = details_params.map do |detail|
-        DailyProgram.new(
-          program_bundle: program_bundle,
+        day = calculate_day(detail[:week])
+        program_bundle.daily_programs.build(
           details: {
             menu: detail[:menu],
             set_info: detail[:set_info],
           },
           week: detail[:week],
-          day: detail[:day],
+          day: day,
         )
+      end
+      Rails.logger.debug "Daily Programs: #{daily_programs.inspect}"
+      begin
+        daily_programs.all?(&:save!)
+      rescue => exception
+        Rails.logger.debug "Daily Programs Save Errors1: #{exception}"
       end
 
       if daily_programs.all?(&:save)
