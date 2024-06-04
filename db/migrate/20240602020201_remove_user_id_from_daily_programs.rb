@@ -1,6 +1,5 @@
 class RemoveUserIdFromDailyPrograms < ActiveRecord::Migration[7.0]
   def change
-    # テーブルが存在する場合のみ外部キーとカラムを削除
     if table_exists?(:daily_programs)
       if foreign_key_exists?(:daily_programs, :users)
         remove_foreign_key :daily_programs, :users
