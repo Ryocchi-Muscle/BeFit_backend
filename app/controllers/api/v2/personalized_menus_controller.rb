@@ -1,7 +1,7 @@
 class Api::V2::PersonalizedMenusController < ApplicationController
   before_action :set_current_user
 
-  def create
+  def create_and_save
     puts "Received params: #{params.inspect}"
     gender = params[:gender]
     frequency = params[:frequency]
@@ -9,7 +9,25 @@ class Api::V2::PersonalizedMenusController < ApplicationController
 
     program = generate_program(gender, frequency, duration)
 
-    render json: { program: program }
+    program_bundle = ProgramBundle.create(
+      user: @current_user,
+      gender: gender,
+      frequency: frequency,
+      duration: duration
+    )
+
+    program.each do |prog|
+      prog[:details].each do |detail|
+        program_bundle.daily_programs.create(
+          menu: detail[:menu],
+          set_info: detail[:set_info],
+          other: detail[:other],
+          week: prog[:week],
+          day: detail[:day]
+        )
+      end
+    end
+    render json: { program: program_bundle }, status: :created
   end
 
   private
