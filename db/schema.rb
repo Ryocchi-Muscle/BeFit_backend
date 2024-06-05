@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_04_220619) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_05_114816) do
   create_table "daily_programs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.json "details"
     t.datetime "created_at", null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_04_220619) do
     t.bigint "program_bundle_id", null: false
     t.integer "week", null: false
     t.boolean "completed", default: false, null: false
+    t.integer "day"
     t.index ["program_bundle_id", "week"], name: "index_daily_programs_on_bundle_week_day", unique: true
     t.index ["program_bundle_id"], name: "index_daily_programs_on_program_bundle_id"
   end

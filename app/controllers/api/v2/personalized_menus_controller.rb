@@ -7,6 +7,12 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     frequency = params[:frequency]
     duration = params[:duration]
 
+    # 既存のプログラムバンドルを確認
+    existing_bundle = ProgramBundle.find_by(user: @current_user)
+    if existing_bundle
+      return render json: { error: "プログラムバンドルは既に存在します" }, status: :unprocessable_entity
+    end
+
     program = generate_program(gender, frequency, duration)
     Rails.logger.debug "Generated program: #{program.inspect}"
 
@@ -19,11 +25,14 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     Rails.logger.debug "Generated program_bundle: #{program_bundle.inspect}"
 
     if program_bundle.save
+      day_counter = 0
       program.each do |prog|
         prog[:details].each do |detail|
+          day_counter += 1
           daily_program = program_bundle.daily_programs.create(
             details: detail.to_json,
-            week: prog[:week]
+            week: prog[:week],
+            day: day_counter
           )
           Rails.logger.debug "Created daily_program: #{daily_program.inspect}"
           unless daily_program.persisted?
