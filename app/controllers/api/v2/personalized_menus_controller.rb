@@ -23,8 +23,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
         prog[:details].each do |detail|
           daily_program = program_bundle.daily_programs.create(
             details: detail.to_json,
-            week: prog[:week],
-            day: detail[:day]
+            week: prog[:week]
           )
           Rails.logger.debug "Created daily_program: #{daily_program.inspect}"
           unless daily_program.persisted?

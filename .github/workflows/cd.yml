@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - develop
 
 jobs:
   deploy:
@@ -27,14 +28,3 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "fitapp-api"
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
-
-      - name: Wait for deployment to complete
-        run: sleep 120  # デプロイ完了を待つ時間（適宜調整）
-
-      - name: Run database migrations
-        run: |
-          heroku ps:scale web=0 --app fitapp-api  # Web dynoを停止
-          heroku ps:scale web=1 --app fitapp-api  # Web dynoを再起動
-          heroku run rails db:migrate --app fitapp-api
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
