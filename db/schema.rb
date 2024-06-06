@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_05_122801) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_06_020438) do
   create_table "daily_programs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.json "details"
     t.datetime "created_at", null: false
@@ -19,18 +19,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_05_122801) do
     t.integer "week", null: false
     t.boolean "completed", default: false, null: false
     t.integer "day"
-    t.index ["program_bundle_id", "week"], name: "index_daily_programs_on_bundle_week_day", unique: true
     t.index ["program_bundle_id"], name: "index_daily_programs_on_program_bundle_id"
   end
 
   create_table "program_bundles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "gender"
     t.string "frequency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "duration", null: false
-    t.index ["user_id"], name: "index_program_bundles_on_user_id"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_program_bundles_on_user_id", unique: true
   end
 
   create_table "todos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -88,8 +87,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_05_122801) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "daily_programs", "program_bundles", on_delete: :cascade
-  add_foreign_key "program_bundles", "users", on_delete: :cascade
   add_foreign_key "training_days", "users", on_delete: :cascade
   add_foreign_key "training_menus", "training_days", on_delete: :cascade
   add_foreign_key "training_sets", "training_menus", on_delete: :cascade
