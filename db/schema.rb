@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_06_065633) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_06_071157) do
   create_table "daily_programs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.json "details"
     t.datetime "created_at", null: false
@@ -87,7 +87,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_06_065633) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "daily_programs", "program_bundles", name: "fk_daily_programs_program_bundles_custom", on_delete: :cascade
+  add_foreign_key "daily_programs", "program_bundles", name: "fk_daily_programs_program_bundles_unique", on_delete: :cascade
   add_foreign_key "program_bundles", "users", name: "fk_program_bundles_users_custom", on_delete: :cascade
   add_foreign_key "training_days", "users", on_delete: :cascade
   add_foreign_key "training_menus", "training_days", on_delete: :cascade
