@@ -7,9 +7,9 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     frequency = params[:frequency]
     duration = params[:duration]
 
+    Rails.logger.debug "Exist program_bundle: #{@current_user.program_bundle.inspect}"
     # 既存のプログラムバンドルを確認
-    existing_bundle = ProgramBundle.find_by(user: @current_user)
-    if existing_bundle
+    if @current_user.program_bundle.present? && @current_user.program_bundle.exists?
       return render json: { error: "プログラムバンドルは既に存在します" }, status: :unprocessable_entity
     end
 
