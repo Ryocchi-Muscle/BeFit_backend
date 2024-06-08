@@ -39,27 +39,23 @@ class Api::V2::PersonalizedMenusController < ApplicationController
               set_info: menu[:set_info]
           )
             unless training_menu.valid?
-            Rails.logger.error "Failed to save training_menu: #{training_menu.errors.full_messages}"
-            render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity #追加した
-            return
+              Rails.logger.error "Failed to save training_menu: #{training_menu.errors.full_messages}"
+              render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity
+              return
             end
           end
 
         Rails.logger.debug "daily_program.training_menus: #{daily_program.training_menus.inspect}"
-          # 保存処理
-        unless daily_program.save
-          Rails.logger.error "Failed to save daily_program: #{daily_program.errors.full_messages}"
-          render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity
-          return
-        end
+
+      unless daily_program.save
+        Rails.logger.error "Failed to save daily_program: #{daily_program.errors.full_messages}"
+        render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity
+        return
       end
+     end
       Rails.logger.debug "Generated program_bundle2: #{program_bundle.inspect}"
       Rails.logger.debug "Generated daily_programs: #{program_bundle.daily_programs.inspect}"
-      if program_bundle.save
       render json: { program: program_bundle, daily_programs: program_bundle.daily_programs }, status: :created
-      else
-        render json: { errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
-      end
     else
       render json: { errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
     end
