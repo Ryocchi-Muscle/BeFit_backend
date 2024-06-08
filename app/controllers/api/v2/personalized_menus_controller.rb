@@ -26,22 +26,31 @@ class Api::V2::PersonalizedMenusController < ApplicationController
       day_counter = 0
       program.each do |prog|
           day_counter += 1
-          daily_program = program_bundle.daily_programs.create(
+          daily_program = program_bundle.daily_programs.build(
             week: prog[:week],
-            day: day_counter
+            day: day_counter,
+            details: prog[:details].to_json
           )
           Rails.logger.debug "Created daily_program: #{daily_program.inspect}"
 
           prog[:details].each do |menu|
-            daily_program.training_menus.create(
+            training_menu = daily_program.training_menus.build(
               exercise_name: menu[:menu],
               set_info: menu[:set_info]
           )
+            unless training_menu.valid?
+            Rails.logger.error "Failed to save training_menu: #{training_menu.errors.full_messages}"
+            render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity #追加した
+            return
+            end
           end
 
+        Rails.logger.debug "daily_program.training_menus: #{daily_program.training_menus.inspect}"
           # 保存処理
         unless daily_program.save
           Rails.logger.error "Failed to save daily_program: #{daily_program.errors.full_messages}"
+          render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity
+          return
         end
       end
       Rails.logger.debug "Generated program_bundle2: #{program_bundle.inspect}"
