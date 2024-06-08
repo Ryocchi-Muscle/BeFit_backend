@@ -7,42 +7,50 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     frequency = params[:frequency]
     duration = params[:duration]
 
-    Rails.logger.debug "Exist program_bundle: #{@current_user.program_bundle.inspect}"
     # 既存のプログラムバンドルを確認
-    if @current_user.program_bundle.present? && @current_user.program_bundle.exists?
+    if @current_user.program_bundle.present?
       return render json: { error: "プログラムバンドルは既に存在します" }, status: :unprocessable_entity
     end
 
     program = generate_program(gender, frequency, duration)
     Rails.logger.debug "Generated program: #{program.inspect}"
 
-    program_bundle = ProgramBundle.create(
+    program_bundle = ProgramBundle.new(
       user: @current_user,
       gender: gender,
       frequency: frequency,
       duration: duration
     )
-    Rails.logger.debug "Generated program_bundle: #{program_bundle.inspect}"
-
+    Rails.logger.debug "Generated program_bundle1: #{program_bundle.inspect}"
     if program_bundle.save
       day_counter = 0
       program.each do |prog|
-        prog[:details].each do |detail|
           day_counter += 1
           daily_program = program_bundle.daily_programs.create(
-            details: detail.to_json,
             week: prog[:week],
             day: day_counter
           )
           Rails.logger.debug "Created daily_program: #{daily_program.inspect}"
-          unless daily_program.persisted?
-          Rails.logger.error "Failed to save daily_program: #{daily_program.errors.full_messages}"
+
+          prog[:details].each do |menu|
+            daily_program.training_menus.create(
+              exercise_name: menu[:menu],
+              set_info: menu[:set_info]
+          )
           end
+
+          # 保存処理
+        unless daily_program.save
+          Rails.logger.error "Failed to save daily_program: #{daily_program.errors.full_messages}"
         end
       end
+      Rails.logger.debug "Generated program_bundle2: #{program_bundle.inspect}"
       Rails.logger.debug "Generated daily_programs: #{program_bundle.daily_programs.inspect}"
-
-    render json: { program: program_bundle, daily_programs: program_bundle.daily_programs }, status: :created
+      if program_bundle.save
+      render json: { program: program_bundle, daily_programs: program_bundle.daily_programs }, status: :created
+      else
+        render json: { errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
+      end
     else
       render json: { errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
     end
