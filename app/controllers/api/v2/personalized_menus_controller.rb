@@ -24,8 +24,6 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     Rails.logger.debug "Generated program_bundle1: #{program_bundle.inspect}"
     if program_bundle.save
       day_counter = 0
-      daily_programs = []
-
       program.each do |prog|
           day_counter += 1
           daily_program = program_bundle.daily_programs.build(
@@ -35,8 +33,6 @@ class Api::V2::PersonalizedMenusController < ApplicationController
           )
           daily_program.save!
           Rails.logger.debug "Created daily_program: #{daily_program.inspect}"
-          daily_programs << daily_program
-          Rails.logger.debug "Created daily_programs: #{daily_programs.inspect}"
 
           prog[:details].each do |menu|
             training_menu = daily_program.training_menus.build(
@@ -63,8 +59,14 @@ class Api::V2::PersonalizedMenusController < ApplicationController
      end
       Rails.logger.debug "Generated program_bundle2: #{program_bundle.inspect}"
       Rails.logger.debug "Generated daily_programs: #{program_bundle.daily_programs.inspect}"
-      render json: { program: program_bundle, daily_programs: program_bundle.daily_programs }, status: :created
-      render json: { program: program_bundle.as_json(include: { daily_programs: { methods: :details } }) }, status: :created
+
+       render json: {
+      program: program_bundle.as_json(include: {
+        daily_programs: {
+          except: [:created_at, :updated_at]
+        }
+      })
+    }, status: :created
     else
       render json: { errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
     end
