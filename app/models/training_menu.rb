@@ -5,8 +5,11 @@ class TrainingMenu < ApplicationRecord
   accepts_nested_attributes_for :training_sets
   # validates :body_part, presence: true
   validates :exercise_name, presence: true
+  validates :training_day, presence: true, unless: :skip_trainingday_validation?
 
-  validates :training_day, presence: true, unless: :creating_from_daily_program?
+  def skip_trainingday_validation?
+    creating_from_daily_program?
+  end
 
   def creating_from_daily_program?
     daily_program.present?
