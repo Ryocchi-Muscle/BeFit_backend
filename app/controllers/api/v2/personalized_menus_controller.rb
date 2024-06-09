@@ -24,20 +24,28 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     Rails.logger.debug "Generated program_bundle1: #{program_bundle.inspect}"
     if program_bundle.save
       day_counter = 0
+      daily_programs = []
+
       program.each do |prog|
           day_counter += 1
           daily_program = program_bundle.daily_programs.build(
             week: prog[:week],
             day: day_counter,
-            details: prog[:details].to_json
+            details: prog[:details]
           )
+          daily_program.save!
           Rails.logger.debug "Created daily_program: #{daily_program.inspect}"
+          daily_programs << daily_program
+          Rails.logger.debug "Created daily_programs: #{daily_programs.inspect}"
 
           prog[:details].each do |menu|
             training_menu = daily_program.training_menus.build(
               exercise_name: menu[:menu],
               set_info: menu[:set_info]
           )
+          # training_day_idを設定しない
+            training_menu.training_day_id = nil
+
             unless training_menu.valid?
               Rails.logger.error "Failed to save training_menu: #{training_menu.errors.full_messages}"
               render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity
@@ -56,6 +64,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
       Rails.logger.debug "Generated program_bundle2: #{program_bundle.inspect}"
       Rails.logger.debug "Generated daily_programs: #{program_bundle.daily_programs.inspect}"
       render json: { program: program_bundle, daily_programs: program_bundle.daily_programs }, status: :created
+      render json: { program: program_bundle.as_json(include: { daily_programs: { methods: :details } }) }, status: :created
     else
       render json: { errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
     end
