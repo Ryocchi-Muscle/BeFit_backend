@@ -23,10 +23,17 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     )
     Rails.logger.debug "Generated program_bundle1: #{program_bundle.inspect}"
     if program_bundle.save
+      current_week = 1
       day_counter = 0
       program.each do |prog|
-          day_counter += 1
-          daily_program = program_bundle.daily_programs.build(
+        if prog[:week] != current_week
+          current_week = prog[:week]
+          day_counter = 0
+        end
+
+        day_counter += 1
+        
+        daily_program = program_bundle.daily_programs.build(
             week: prog[:week],
             day: day_counter,
             details: prog[:details]
