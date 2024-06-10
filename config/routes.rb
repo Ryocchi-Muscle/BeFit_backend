@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     namespace :v2 do
       post 'personalized_menus/create_and_save', to: 'personalized_menus#create_and_save'
       get 'personalized_menus', to: 'personalized_menus#index'
+      delete 'personalized_menus/:id', to: 'personalized_menus#destroy'  # DEL
       # resources 'programs', only: [:index, :create, :destroy]
       resources :training_records, only: [:index, :show, :create, :weekly_summary] do
         get 'weekly_summary', on: :collection

@@ -98,6 +98,15 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     end
   end
 
+  def destroy
+    program_bundle = @current_user.program_bundle.find(params[:id])
+    if program_bundle.destroy
+      render json: { message: "プログラムバンドルを削除しました" }, status: :ok
+    else
+      render json: { errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def generate_program(gender, frequency, duration)
