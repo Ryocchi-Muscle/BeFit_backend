@@ -98,6 +98,17 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     end
   end
 
+  def destroy
+    program_bundle = @current_user.program_bundle
+    if program_bundle.nil?
+      render json: { success: false, errors: ["Program_bundle not found"] }, status: :not_found
+    elsif program_bundle.destroy
+     render json: { success: true, message: "deleted plans" }, status: :ok
+    else
+      render json: { success: false, errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def generate_program(gender, frequency, duration)
