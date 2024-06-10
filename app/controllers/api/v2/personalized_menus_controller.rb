@@ -99,11 +99,13 @@ class Api::V2::PersonalizedMenusController < ApplicationController
   end
 
   def destroy
-    program_bundle = @current_user.program_bundle.find(params[:id])
-    if program_bundle.destroy
-      render json: { message: "プログラムバンドルを削除しました" }, status: :ok
+    program_bundle = @current_user.program_bundle
+    if program_bundle.nil?
+      render json: { success: false, errors: ["Program_bundle not found"] }, status: :not_found
+    elsif program_bundle.destroy
+     render json: { success: true, message: "deleted plans" }, status: :ok
     else
-      render json: { errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
+      render json: { success: false, errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
