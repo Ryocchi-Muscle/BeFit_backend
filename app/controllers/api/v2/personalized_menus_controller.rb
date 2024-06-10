@@ -1,6 +1,22 @@
 class Api::V2::PersonalizedMenusController < ApplicationController
   before_action :set_current_user
 
+  def index
+    program_bundle = @current_user.program_bundle
+
+    if program_bundle
+      program_json = program_bundle.as_json(include: {
+        daily_programs: {
+          include: :training_menus,
+          except: [:created_at, :updated_at]
+        }
+      })
+      render json: { program: program_json }, status: :ok
+    else
+      render json: { program: nil }, status: :ok
+    end
+  end
+
   def create_and_save
     puts "Received params: #{params.inspect}"
     gender = params[:gender]
@@ -32,7 +48,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
         end
 
         day_counter += 1
-        
+
         daily_program = program_bundle.daily_programs.build(
             week: prog[:week],
             day: day_counter,
@@ -67,13 +83,16 @@ class Api::V2::PersonalizedMenusController < ApplicationController
       Rails.logger.debug "Generated program_bundle2: #{program_bundle.inspect}"
       Rails.logger.debug "Generated daily_programs: #{program_bundle.daily_programs.inspect}"
 
-       render json: {
-      program: program_bundle.as_json(include: {
+
+       program_json =  program_bundle.as_json(include: {
         daily_programs: {
+          include: :training_menus,
           except: [:created_at, :updated_at]
         }
       })
-    }, status: :created
+      Rails.logger.debug "Generated program JSON: #{program_json.inspect}"
+
+      render json: { program: program_json }, status: :created
     else
       render json: { errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
     end
