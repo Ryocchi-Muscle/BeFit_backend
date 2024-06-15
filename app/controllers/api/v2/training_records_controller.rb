@@ -34,15 +34,17 @@ class Api::V2::TrainingRecordsController < ApplicationController
       training_day.training_menus.where(id: existing_menus_ids - client_menu_ids).destroy_all
 
       params[:menus].each do |menu|
-        training_menu = training_day.training_menus.find_or_initialize_by(exercise_name: menu[:menuName], body_part: menu[:body_part])
+        training_menu = training_day.training_menus.find_or_initialize_by(
+          exercise_name: menu[:menuName],
+          body_part: menu[:body_part],
+          daily_program_id: menu[:daily_program_id])
         Rails.logger.debug("training_menu (before save!): #{training_menu.inspect}")
-        # training_menu.update!(exercise_name: menu[:menuName], body_part: menu[:body_part])
 
         begin
           if training_menu.new_record?
             training_menu.save!
           else
-            training_menu.update!(exercise_name: menu[:menuName], body_part: menu[:body_part])
+            training_menu.update!(exercise_name: menu[:menuName], body_part: menu[:body_part], daily_program_id: menu[:daily_program_id])
           end
         rescue ActiveRecord::RecordInvalid => e
           Rails.loggerdebug("training_menu.errors: #{e.training_menu.errors.full_messages}")
