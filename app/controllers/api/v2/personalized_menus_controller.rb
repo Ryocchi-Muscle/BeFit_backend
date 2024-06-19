@@ -52,7 +52,8 @@ class Api::V2::PersonalizedMenusController < ApplicationController
         daily_program = program_bundle.daily_programs.build(
             week: prog[:week],
             day: day_counter,
-            details: prog[:details]
+            details: prog[:details],
+            date: nil
           )
           daily_program.save!
           Rails.logger.debug "Created daily_program: #{daily_program.inspect}"
@@ -95,6 +96,16 @@ class Api::V2::PersonalizedMenusController < ApplicationController
       render json: { program: program_json }, status: :created
     else
       render json: { errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def save_daily_program
+  daily_program = DailyProgram.find(params[:id])
+
+    if daily_program.update(date: Date.today)
+      render json: daily_program, status: :ok
+    else
+      render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
