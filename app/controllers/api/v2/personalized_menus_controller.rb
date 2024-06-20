@@ -23,7 +23,6 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     frequency = params[:frequency]
     duration = params[:duration]
 
-    # 既存のプログラムバンドルを確認
     if @current_user.program_bundle.present?
       return render json: { error: "プログラムバンドルは既に存在します" }, status: :unprocessable_entity
     end
@@ -55,7 +54,11 @@ class Api::V2::PersonalizedMenusController < ApplicationController
             details: prog[:details],
             date: nil
           )
-          daily_program.save!
+          unless daily_program.save
+            Rails.logger.error "Failed to save daily_program: #{daily_program.errors.full_messages}"
+            render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity
+            return
+          end
           Rails.logger.debug "Created daily_program: #{daily_program.inspect}"
 
           prog[:details].each do |menu|
