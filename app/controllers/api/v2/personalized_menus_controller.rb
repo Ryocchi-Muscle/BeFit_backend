@@ -105,7 +105,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
   def save_daily_program
   daily_program = DailyProgram.find(params[:id])
 
-    if daily_program.update(date: Date.today)
+    if daily_program.update(date: Date.today, completed: true)
       render json: daily_program, status: :ok
     else
       render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity

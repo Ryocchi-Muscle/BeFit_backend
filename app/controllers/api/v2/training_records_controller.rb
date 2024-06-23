@@ -85,6 +85,18 @@ class Api::V2::TrainingRecordsController < ApplicationController
     render json: { week_start: start_date, total_weight: current_week_weight }
   end
 
+  def check_completion
+    date = params[:date]
+    program_id = params[:program_id]
+
+    Rails.logger.debug "Checking completion for date: #{date}, program_id: #{program_id}"
+
+    completed = DailyProgram.where(date: date, completed: true).exists?
+
+    Rails.logger.debug "Completion status: #{completed}"
+    render json: { isCompleted: completed}
+  end
+
   private
 
     def training_day_params
