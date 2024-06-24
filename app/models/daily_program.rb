@@ -8,14 +8,14 @@ class DailyProgram < ApplicationRecord
   validate :unique_date_per_program_bundle, if: :date_present?
 
   def unique_date_per_program_bundle
-    if DailyProgram.where.not(id: id).where(program_bundle_id: program_bundle_id, date: date).exists?
-      errors.add(:date, "You can only create one daily program per day for this program bundle")
-    end
+    return unless DailyProgram.where.not(id: id).where(program_bundle_id: program_bundle_id, date: date).exists?
+
+    errors.add(:date, "You can only create one daily program per day for this program bundle")
   end
 
   private
 
-  def date_present?
-    date.present?
-  end
+    def date_present?
+      date.present?
+    end
 end
