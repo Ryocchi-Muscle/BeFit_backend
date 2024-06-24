@@ -4,7 +4,7 @@ class Api::V2::ProgramsController < ApplicationController
   def index
     program_bundle = @current_user.program_bundle
     Rails.logger.debug "program_bundle: #{program_bundle.inspect}"
-    render json: { program: program_bundle}
+    render json: { program: program_bundle }
   end
 
   def create
@@ -23,7 +23,7 @@ class Api::V2::ProgramsController < ApplicationController
     program_bundle = ProgramBundle.new(program_bundle_params)
     program_bundle.user = @current_user
 
-    if  program_bundle.save
+    if program_bundle.save
       details_params = params.require(:details).map do |detail|
         detail.permit(:menu, :set_info, :week, :day)
       end
@@ -35,21 +35,21 @@ class Api::V2::ProgramsController < ApplicationController
         program_bundle.daily_programs.build(
           details: {
             menu: detail[:menu],
-            set_info: detail[:set_info],
+            set_info: detail[:set_info]
           },
           week: detail[:week],
-          day: day,
+          day: day
         )
       end
       Rails.logger.debug "Daily Programs: #{daily_programs.inspect}"
       begin
         daily_programs.all?(&:save!)
-      rescue => exception
-        Rails.logger.debug "Daily Programs Save Errors1: #{exception}"
+      rescue StandardError => e
+        Rails.logger.debug "Daily Programs Save Errors1: #{e}"
       end
 
       if daily_programs.all?(&:save)
-        render json: { sucess: true, progmram: program_bundle}, status: :created
+        render json: { sucess: true, progmram: program_bundle }, status: :created
       else
         Rails.logger.debug "Daily Programs Save Errors: #{daily_programs.map(&:errors).map(&:full_messages)}"
         render json: { success: false, errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
@@ -65,7 +65,7 @@ class Api::V2::ProgramsController < ApplicationController
     if program_bundle.nil?
       render json: { success: false, errors: ["Program_bundle not found"] }, status: :not_found
     elsif program_bundle.destroy
-     render json: { success: true, message: "deleted plans" }, status: :ok
+      render json: { success: true, message: "deleted plans" }, status: :ok
     else
       render json: { success: false, errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
     end

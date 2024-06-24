@@ -37,7 +37,8 @@ class Api::V2::TrainingRecordsController < ApplicationController
         training_menu = training_day.training_menus.find_or_initialize_by(
           exercise_name: menu[:menuName],
           body_part: menu[:body_part],
-          daily_program_id: menu[:daily_program_id])
+          daily_program_id: menu[:daily_program_id]
+        )
         Rails.logger.debug("training_menu (before save!): #{training_menu.inspect}")
 
         begin
@@ -94,7 +95,7 @@ class Api::V2::TrainingRecordsController < ApplicationController
     completed = DailyProgram.where(date: date, completed: true).exists?
 
     Rails.logger.debug "Completion status: #{completed}"
-    render json: { isCompleted: completed}
+    render json: { isCompleted: completed }
   end
 
   private
