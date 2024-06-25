@@ -116,26 +116,25 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     program_details = params[:details]
 
     ActiveRecord::Base.transaction do
-      # 既存のトレーニングメニューをループして更新または作成
       program_details.each do |detail|
         training_menu = daily_program.training_menus.find_or_initialize_by(exercise_name: detail[:menuName])
         training_menu.set_info = detail[:sets].map { |set| "#{set[:reps]}回 #{set[:weight]}kg" }.join(', ')
         training_menu.save!
 
-        # トレーニングセットの更新または作成
         detail[:sets].each do |set_detail|
           training_set = training_menu.training_sets.find_or_initialize_by(set_number: set_detail[:setNumber])
-          training_set.weight = set_detail[:weight]
-          training_set.reps = set_detail[:reps]
-          training_set.completed = set_detail[:completed]
+
+          # 更新対象フィールドが空でない場合のみ更新
+          training_set.weight = set_detail[:weight] unless set_detail[:weight].blank?
+          training_set.reps = set_detail[:reps] unless set_detail[:reps].blank?
+          training_set.completed = set_detail[:completed] unless set_detail[:completed].nil?
+
           training_set.save!
         end
 
-        # 不要になったトレーニングセットを削除
         training_menu.training_sets.where.not(set_number: detail[:sets].map { |set| set[:setNumber] }).destroy_all
       end
 
-      # 不要になったトレーニングメニューを削除
       daily_program.training_menus.where.not(exercise_name: program_details.map { |detail| detail[:menuName] }).destroy_all
     end
 
