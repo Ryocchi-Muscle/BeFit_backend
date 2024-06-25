@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       patch 'personalized_menus/:id/save_daily_program', to: 'personalized_menus#save_daily_program'
       get 'personalized_menus', to: 'personalized_menus#index'
       delete 'personalized_menus/:id', to: 'personalized_menus#destroy'
+      patch 'personalized_menus/:id/update', to: 'personalized_menus#update'
 
       resources :training_records, only: [:index, :show, :create] do
         get 'weekly_summary', on: :collection

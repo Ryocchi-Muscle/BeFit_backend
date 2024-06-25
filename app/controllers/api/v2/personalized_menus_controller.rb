@@ -111,6 +111,42 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     end
   end
 
+  def update
+    daily_program = DailyProgram.find(params[:id])
+    program_details = params[:details]
+
+    ActiveRecord::Base.transaction do
+      # 既存のトレーニングメニューをループして更新または作成
+      program_details.each do |detail|
+        training_menu = daily_program.training_menus.find_or_initialize_by(exercise_name: detail[:menuName])
+        training_menu.set_info = detail[:sets].map { |set| "#{set[:reps]}回 #{set[:weight]}kg" }.join(', ')
+        training_menu.save!
+
+        # トレーニングセットの更新または作成
+        detail[:sets].each do |set_detail|
+          training_set = training_menu.training_sets.find_or_initialize_by(set_number: set_detail[:setNumber])
+          training_set.weight = set_detail[:weight]
+          training_set.reps = set_detail[:reps]
+          training_set.completed = set_detail[:completed]
+          training_set.save!
+        end
+
+        # 不要になったトレーニングセットを削除
+        training_menu.training_sets.where.not(set_number: detail[:sets].map { |set| set[:setNumber] }).destroy_all
+      end
+
+      # 不要になったトレーニングメニューを削除
+      daily_program.training_menus.where.not(exercise_name: program_details.map { |detail| detail[:menuName] }).destroy_all
+    end
+
+    if daily_program.save
+      render json: daily_program, status: :ok
+    else
+      render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+
   def destroy
     program_bundle = @current_user.program_bundle
     if program_bundle.nil?
