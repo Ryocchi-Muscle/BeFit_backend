@@ -6,19 +6,23 @@ class Api::V2::TrainingRecordsController < ApplicationController
     render json: training_days, each_serializer: TrainingDaySerializer
   end
 
-  def show
-    date = params[:id]
-    training_day = TrainingDay.find_by(date: date, user_id: current_user.id)
+ def show
+  date = params[:id]
+  training_day = TrainingDay.find_by(date: date, user_id: current_user.id)
 
     if training_day
       training_menus = training_day.training_menus.includes(:training_sets)
-      render json: training_menus.as_json(include: { training_sets: { except: [:created_at, :updated_at] } }),
-             status: :ok # 200
-      Rails.logger.debug("training_menus: #{training_menus.inspect}")
+      Rails.logger.debug "Retrieved training_menus: #{training_menus.as_json(include: { training_sets: { except: [:created_at, :updated_at] } })}"
+        # 各 training_menu の exercise_name をデバッグ出力
+      training_menus.each do |menu|
+        Rails.logger.debug "TrainingMenu: #{menu.exercise_name}"
+      end
+
+      render json: training_menus, each_serializer: TrainingMenuSerializer, status: :ok # 200
     else
       render json: { status: 'error', message: 'Record not found' }, status: :not_found # 404
     end
-  end
+ end
 
   def create
     ActiveRecord::Base.transaction do
