@@ -120,6 +120,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
         training_menu = daily_program.training_menus.find_or_initialize_by(exercise_name: detail[:menuName])
         training_menu.set_info = detail[:sets].map { |set| "#{set[:reps]}回 #{set[:weight]}kg" }.join(', ')
         training_menu.save!
+        Rails.logger.debug("training_menu: #{training_menu.inspect}")
 
         detail[:sets].each do |set_detail|
           training_set = training_menu.training_sets.find_or_initialize_by(set_number: set_detail[:setNumber])
@@ -130,6 +131,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
           training_set.completed = set_detail[:completed] unless set_detail[:completed].nil?
 
           training_set.save!
+          Rails.logger.debug("training_set: #{training_set.inspect}")
         end
 
         training_menu.training_sets.where.not(set_number: detail[:sets].map { |set| set[:setNumber] }).destroy_all
@@ -140,6 +142,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
 
     if daily_program.save
       render json: daily_program, status: :ok
+      Rails.logger.debug("daily_program: #{daily_program.inspect}")
     else
       render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity
     end
@@ -188,14 +191,14 @@ class Api::V2::PersonalizedMenusController < ApplicationController
               { menu: "3.デッドリフト", set_info: "10回2セット インターバル3分" },
               { menu: "4.懸垂", set_info: "10回3セット インターバル3分" },
               { menu: "5.サイドレイズ", set_info: "12回3セット インターバル1分" },
-              { menu: "6.ブローラー", set_info: "10回2セット インターバル2分" }
+              { menu: "6.アブローラー", set_info: "10回2セット インターバル2分" }
             ],
             'B' => [
               { menu: "1.スクワット", set_info: "10回3セット インターバル3分" },
-              { menu: "ベンチプレス", set_info: "10回3セット インターバル3分" },
-              { menu: "懸垂", set_info: "10回3セット インターバル3分" },
-              { menu: "サイドレイズ", set_info: "12回3セット インターバル1分" },
-              { menu: "アブローラー", set_info: "10回3セット インターバル2分" }
+              { menu: "2.ベンチプレス", set_info: "10回3セット インターバル3分" },
+              { menu: "3.懸垂", set_info: "10回3セット インターバル3分" },
+              { menu: "4.サイドレイズ", set_info: "12回3セット インターバル1分" },
+              { menu: "5.アブローラー", set_info: "10回3セット インターバル2分" }
             ]
           },
           'female' => {
