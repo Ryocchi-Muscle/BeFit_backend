@@ -17,6 +17,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     end
   end
 
+  # メニューの作成＆保存
   def create_and_save
     puts "Received params: #{params.inspect}"
     gender = params[:gender]
@@ -66,6 +67,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
             exercise_name: menu[:menu],
             set_info: menu[:set_info]
           )
+
         # training_day_idを設定しない
           training_menu.training_day_id = nil
 
@@ -101,42 +103,46 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     end
   end
 
-  def save_daily_program
-    daily_program = DailyProgram.find(params[:id])
-
-    if daily_program.update(date: Date.today, completed: true)
-      render json: daily_program, status: :ok
-    else
-      render json: { errors: daily_program.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
-
+  #  メニューの更新
   def update
     daily_program = DailyProgram.find(params[:id])
     program_details = params[:details]
 
     ActiveRecord::Base.transaction do
       program_details.each do |detail|
-        training_menu = daily_program.training_menus.find_or_initialize_by(exercise_name: detail[:menuName])
+        training_menu = daily_program.training_menus.find_by(exercise_name: detail[:menuName])
+
+        # 見つからない場合はエラーを発生させる
+        unless training_menu
+          raise ActiveRecord::RecordNotFound, "TrainingMenu not found for exercise_name: #{detail[:menuName]}"
+        end
+
         training_menu.set_info = detail[:sets].map { |set| "#{set[:reps]}回 #{set[:weight]}kg" }.join(', ')
         training_menu.save!
         Rails.logger.debug("training_menu: #{training_menu.inspect}")
 
         detail[:sets].each do |set_detail|
-          training_set = training_menu.training_sets.find_or_initialize_by(set_number: set_detail[:setNumber])
+          training_set = training_menu.training_sets.find_by(set_number: set_detail[:setNumber])
+
+          # 見つからない場合はエラーを発生させる
+          unless training_set
+            raise ActiveRecord::RecordNotFound, "TrainingSet not found for set_number: #{set_detail[:setNumber]}"
+          end
 
           # 更新対象フィールドが空でない場合のみ更新
-          training_set.weight = set_detail[:weight] unless set_detail[:weight].blank?
-          training_set.reps = set_detail[:reps] unless set_detail[:reps].blank?
+          training_set.weight = set_detail[:weight] if set_detail[:weight].present?
+          training_set.reps = set_detail[:reps] if set_detail[:reps].present?
           training_set.completed = set_detail[:completed] unless set_detail[:completed].nil?
 
           training_set.save!
           Rails.logger.debug("training_set: #{training_set.inspect}")
         end
 
+        # 既存のセットの中で、入力されていないセット番号のレコードを削除する
         training_menu.training_sets.where.not(set_number: detail[:sets].map { |set| set[:setNumber] }).destroy_all
       end
 
+      # 既存のトレーニングメニューの中で、入力されていないメニュー名のレコードを削除する
       daily_program.training_menus.where.not(exercise_name: program_details.map { |detail| detail[:menuName] }).destroy_all
     end
 
@@ -148,15 +154,21 @@ class Api::V2::PersonalizedMenusController < ApplicationController
     end
   end
 
-
   def destroy
     program_bundle = @current_user.program_bundle
+
     if program_bundle.nil?
       render json: { success: false, errors: ["Program_bundle not found"] }, status: :not_found
-    elsif program_bundle.destroy
-      render json: { success: true, message: "deleted plans" }, status: :ok
     else
-      render json: { success: false, errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
+      # 該当するユーザーの全てのTrainingDayを削除
+      training_days = TrainingDay.where(user_id: @current_user.id)
+      training_days.destroy_all
+
+      if program_bundle.destroy
+        render json: { success: true, message: "deleted plans" }, status: :ok
+      else
+        render json: { success: false, errors: program_bundle.errors.full_messages }, status: :unprocessable_entity
+      end
     end
   end
 

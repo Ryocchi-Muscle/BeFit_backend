@@ -6,9 +6,9 @@ class Api::V2::TrainingRecordsController < ApplicationController
     render json: training_days, each_serializer: TrainingDaySerializer
   end
 
- def show
-  date = params[:id]
-  training_day = TrainingDay.find_by(date: date, user_id: current_user.id)
+  def show
+    date = params[:id]
+    training_day = TrainingDay.find_by(date: date, user_id: current_user.id)
 
     if training_day
       training_menus = training_day.training_menus.includes(:training_sets)
@@ -22,7 +22,7 @@ class Api::V2::TrainingRecordsController < ApplicationController
     else
       render json: { status: 'error', message: 'Record not found' }, status: :not_found # 404
     end
- end
+  end
 
   def create
     ActiveRecord::Base.transaction do
@@ -75,6 +75,65 @@ class Api::V2::TrainingRecordsController < ApplicationController
       render json: { status: 'success' }
     rescue ActiveRecord::RecordInvalid => e
       render json: { status: 'error', errors: e.record.errors.full_messages }, status: :unprocessable_entity # 422
+      raise ActiveRecord::Rollback
+    end
+  end
+
+  # 完了ボタンを押したときの処理
+  def update
+    Rails.logger.debug("params: #{params.inspect}")
+
+    ActiveRecord::Base.transaction do
+      # 1. paramsからdailyProgramIdを取得
+      daily_program_id = params[:dailyProgramId]
+
+      # 2. daily_programsの更新
+      daily_program = DailyProgram.find(daily_program_id)
+      daily_program.update!(completed: true, date: Date.today)
+
+      # 3. training_dayの新規作成または既存のものを取得
+      user_id = daily_program.program_bundle.user_id
+      training_day = TrainingDay.find_or_create_by(user_id: user_id, date: Date.today)
+      Rails.logger.debug("training_day: #{training_day.inspect}")
+
+      # 4. training_menusの更新
+      params[:menus].each do |menu|
+        training_menu = TrainingMenu.find_by(
+          exercise_name: menu[:menuName],
+          body_part: menu[:body_part],
+          daily_program_id: daily_program_id
+        )
+
+        # レコードが見つからない場合、エラーメッセージを表示してロールバック
+        if training_menu.nil?
+          render json: { status: 'error', message: 'Training menu not found' }, status: :not_found
+          raise ActiveRecord::Rollback
+        end
+
+        # 既存のtraining_menuのtraining_day_idを更新
+        training_menu.update!(
+          training_day_id: training_day.id,
+          exercise_name: menu[:menuName],
+          body_part: menu[:body_part],
+          daily_program_id: daily_program_id
+        )
+
+        # 5. training_setsの更新または作成
+        menu[:sets].each do |set|
+          training_set = training_menu.training_sets.find_or_initialize_by(set_number: set[:setNumber])
+          training_set.update!(
+            set_number: set[:setNumber],
+            weight: set[:weight],
+            reps: set[:reps],
+            completed: set[:completed]
+          )
+        end
+      end
+
+      render json: { status: 'success' }
+    rescue ActiveRecord::RecordInvalid => e
+      Rails.logger.error "Failed to update records: #{e.record.errors.full_messages}"
+      render json: { status: 'error', errors: e.record.errors.full_messages }, status: :unprocessable_entity
       raise ActiveRecord::Rollback
     end
   end
