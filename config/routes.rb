@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       delete 'personalized_menus/:id', to: 'personalized_menus#destroy'
       patch 'personalized_menus/:id/update', to: 'personalized_menus#update'
 
-      resources :training_records, only: [:index, :show, :create, :update] do
+      resources :training_records, only: [:index, :show, :update] do
         get 'weekly_summary', on: :collection
         get 'check_completion/:date/:program_id', to: 'training_records#check_completion', on: :collection
       end
