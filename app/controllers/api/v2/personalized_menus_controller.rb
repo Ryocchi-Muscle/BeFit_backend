@@ -234,7 +234,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
         '3' => {
           'male' => {
             'A' => [
-              { menu: "1.スクワット", set_info: "10回3セット インターバル3分" },
+              { menu: "1.スクワット(脚)", set_info: "10回3セット インターバル3分" },
               { menu: "2.ベンチプレス", set_info: "10回3セット インターバル3分" },
               { menu: "3.デッドリフト", set_info: "10回2セット インターバル3分" },
               { menu: "4.懸垂", set_info: "10回3セット インターバル3分" },
@@ -242,7 +242,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
               { menu: "6.アブローラー", set_info: "10回3セット インターバル2分" }
             ],
             'B' => [
-              { menu: "1.スクワット", set_info: "10回3セット インターバル3分" },
+              { menu: "1.スクワット(脚)", set_info: "10回3セット インターバル3分" },
               { menu: "2.ベンチプレス", set_info: "10回3セット インターバル3分" },
               { menu: "3.懸垂", set_info: "10回3セット インターバル3分" },
               { menu: "4.サイドレイズ", set_info: "12回3セット インターバル1分" },
@@ -259,7 +259,7 @@ class Api::V2::PersonalizedMenusController < ApplicationController
               { menu: "6.アブローラー（腹）", set_info: "10回3セット インターバル1分" }
             ],
             'B' => [
-              { menu: "1.インナーサイ（ハム）", set_info: "15回3セット インターバル1分" },
+              { menu: "1.インナーサイ（ハムストリング）", set_info: "15回3セット インターバル1分" },
               { menu: "2.アウターサイ（尻）", set_info: "15回3セット インターバル1分" },
               { menu: "3.シーテッドロウ（背中）", set_info: "10回3セット インターバル2分" },
               { menu: "4. ブルガリアンスクワット（脚＆尻）", set_info: "10回3セット インターバル2分" },
