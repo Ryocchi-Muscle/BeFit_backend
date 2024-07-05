@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_19_012313) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_05_061822) do
   create_table "daily_programs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.json "details"
     t.datetime "created_at", null: false
@@ -52,14 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_19_012313) do
     t.string "other"
     t.bigint "daily_program_id", null: false
     t.index ["training_day_id"], name: "index_training_menus_on_training_day_id"
-  end
-
-  create_table "training_sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.date "start_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_training_sessions_on_user_id"
   end
 
   create_table "training_sets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
