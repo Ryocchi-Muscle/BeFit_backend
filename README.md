@@ -1,3 +1,5 @@
+![newiphonemockup](https://github.com/Ryocchi-Muscle/fitapp-api/assets/140929302/bb068a5d-ae34-4b55-8644-4bcdb8619955)
+
 ## ■ サービス概要
 
 「ジムに行っても、何をしていいかわからない〜」<br>
