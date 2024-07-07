@@ -42,8 +42,6 @@
 **③動画付きトレーニング解説機能**<br>
 トレーニングを行う上で、トレーニンフォーム、対象筋肉を理解してトレーニングを行うことが大切です。<br>
 そのため、メニューの対象筋肉を図解表示し、おすすめのYouTube動画も掲載しています。<br>
-、手順を解説しています。対象筋肉を理解してトレーニングを行うことが大切です。そのために開発者おすすめのYouTube動画も掲載しています。
-
 
 ## ■ 機能一覧<br>
 **機能**
@@ -66,14 +64,13 @@
 
 | カテゴリ       | 技術                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------- |
-| フロントエンド | TypeScript 5.3.3 / React 18.2 / Next.js 14.0.4                                        |
+| フロントエンド | TypeScript 5.3.3 / React 18.2 / Next.js 14.2.3                                   |
 | バックエンド   | Ruby 3.2.2 / Ruby on Rails 7.0.8 （APIモード）                                         |
-| データベース   | PostgreSQL                                                                            |
+| データベース   | MySQL                                                                            |
 | 認証           | NextAuth.js                                                                           |
-| 環境構築       | Docker                                                                                |
-| インフラ       | Vercel / Render                                                                       |
-| Web API        | 楽天市場商品検索API / LINE Messaging API / OpenWeatherMap API                         |
-| その他         | SWR / shadcn/ui / GoogleAnalitycs / tailwindCSS / 
+| CI/CD           | GitHubActions                                                                           |
+| インフラ       | Vercel / Heroku                                                                       |                       |
+| その他         | SWR / shadcn/ui / Radix UI/ GoogleAnalitycs / tailwind CSS /
 
 
 ## ■ 画面遷移図<br>
