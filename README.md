@@ -1,4 +1,5 @@
 ![newiphonemockup](https://github.com/Ryocchi-Muscle/fitapp-api/assets/140929302/bb068a5d-ae34-4b55-8644-4bcdb8619955)
+[![Ruby](https://img.shields.io/badge/Ruby-v3.2.2-CC342D?logo=Ruby&logoColor=CC342D)](https://www.ruby-lang.org/ja/news/2023/03/30/ruby-3-2-2-released)[![Rails](https://img.shields.io/badge/Rails-v7.0.7.2-CC0000?logo=Ruby-on-Rails&logoColor=CC0000)](https://rubyonrails.org/2023/3/13/Rails-7-0-4-3-and-6-1-7-3-have-been-released)[![TypeScript](https://img.shields.io/badge/TypeScript-v5.0.2-007ACC?logo=TypeScript&logoColor=007ACC)](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html)[![React](https://img.shields.io/badge/React-v18.2.0-61DAFB?logo=React&logoColor=61DAFB)](https://react.dev/blog/2022/03/29/react-v18#whats-new-in-react-18)[![Next.js](https://img.shields.io/badge/Next.js-v14.2.4-000000?logo=Next.js&logoColor=000000)](https://nextjs.org/blog/next-13-2)[![CI/CD](https://github.com/keynyaan/hayabusatrip-frontend/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/keynyaan/hayabusatrip-frontend/actions/workflows/ci.yml)[![Thanks](https://img.shields.io/badge/Thank%20you-for%20visiting-00aab9)](https://www.befitvercel.com/)
 
 
 ## ■ サービス名
@@ -30,52 +31,61 @@
 4.週ごとの総重量が記録されるため、週ごとのトレーニング強度の進捗を確認することができます。<br>
 
 ## ■ メイン機能の使い方
-<p>
-<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
 
-  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
-    <h3>プログラム作成</h3>
-    <img src="assets/program.gif" alt="トレーニングプログラム作成" style="width: 100%;">
-    <p>まずは、プログラム作成ボタンを押して、各情報を記入後に作成ボタンを押す。</p>
-  </div>
+<table>
+  <tr>
+    <th style="text-align: center">プログラム作成</th>
+    <th style="text-align: center">メニュー記録</th>
+    <th style="text-align: center">メニュー編集</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;">
+      <img src="assets/program.gif" alt="トレーニングプログラム作成" style="width: 100%;"><br>
+      まずは、プログラム作成ボタンを押して、各情報を記入後に作成ボタンを押す。
+    </td>
+    <td style="text-align: center;">
+      <img src="assets/menu.gif" alt="メニュー記録" style="width: 100%;"><br>
+      まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。
+    </td>
+    <td style="text-align: center;">
+      <img src="assets/menu_edit.gif" alt="メニュー編集" style="width: 100%;"><br>
+      まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。
+    </td>
+  </tr>
+  <tr>
+    <th style="text-align: center">記録表示</th>
+    <th style="text-align: center">カレンダー機能</th>
+    <th style="text-align: center">解説機能</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;">
+      <img src="assets/record.gif" alt="記録表示" style="width: 100%;"><br>
+      1週間のトレーニングボリュームを棒グラフで表示します。最大8週間分の記録を確認することができ、トレーニングの成長を可視化できます。
+    </td>
+    <td style="text-align: center;">
+      <img src="assets/calendar.gif" alt="カレンダー機能" style="width: 100%;"><br>
+      カレンダーから過去の記録を確認することができます。
+    </td>
+    <td style="text-align: center;">
+      <img src="assets/trainingguide.gif" alt="解説機能" style="width: 100%;"><br>
+      初心者でも理解しやすく、対象の筋肉の筋繊維図や、おすすめの動画も載せています。
+    </td>
+  </tr>
+  <tr>
+    <th style="text-align: center">メニュー検索機能</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td style="text-align: center;">
+      <img src="assets/traingguie_search.gif" alt="メニュー検索機能" style="width: 100%;"><br>
+      解説機能の中でメニューを検索できます。
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
 
-  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
-    <h3>メニュー記録</h3>
-    <img src="assets/menu.gif" alt="メニュー記録" style="width: 100%;">
-    <p>まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</p>
-  </div>
-
-  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
-    <h3>メニュー編集</h3>
-    <img src="assets/menu_edit.gif" alt="メニュー編集" style="width: 100%;">
-    <p>まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</p>
-  </div>
-
-  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
-    <h3>記録表示</h3>
-    <img src="assets/record.gif" alt="メニュー編集" style="width: 100%;">
-    <p>1週間のトレーニングボリュームを棒グラフで表示します。最大8週間分の記録を確認することができ、<br>トレーニングの成長を可視化できます。</p>
-  </div>
-
-  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
-    <h3>カレンダー機能</h3>
-    <img src="assets/calendar.gif" alt="メニュー編集" style="width: 100%;">
-    <p>カレンダーから過去の記録を確認することができます。</p>
-  </div>
-
-  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
-    <h3>解説機能</h3>
-    <img src="assets/trainingguide.gif" alt="トレーニング解説機能" style="width: 100%;">
-    <p>初心者でも理解しやすく、対象の筋肉の筋繊維図や、おすすめの動画も載せています。</p>
-  </div>
-
-  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
-    <h3>メニュー検索機能</h3>
-    <img src="assets/traingguie_search.gif" alt="トレーニング解説機能" style="width: 100%;">
-    <p>解説機能の中でメニューを検索できます。</p>
-  </div>
-</div>
-</p>
 
 
 
