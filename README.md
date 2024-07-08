@@ -42,6 +42,7 @@ https://github.com/Ryocchi-Muscle/fitapp-api/assets/140929302/dc5d0afc-1d24-437c
     <img src="assets/プログラム機能.gif" alt="トレーニングプログラム作成" style="width: 100%;">
     <p>まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</p>
   </div>
+
   <div style="text-align: center; width: 30%;">
     <h3>トレーニングプログラム作成</h3>
     <img src="assets/画面収録 2024-07-07 13.29.40.gif" alt="トレーニングプログラム作成" style="width: 100%;">
