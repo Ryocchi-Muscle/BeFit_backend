@@ -37,19 +37,18 @@
 
   <div style="width: 30%; margin-bottom: 20px; text-align: center;">
     <h3>トレーニングプログラム作成</h3>
+    <img src="assets/program.gif" alt="トレーニングプログラム作成" style="width: 100%;">
+    <p>まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</p>
+  </div>
+  <div style="width: 30%; margin-bottom: 20px; text-align: center;">
+    <h3>トレーニングプログラム作成</h3>
     <img src="assets/プログラム機能.gif" alt="トレーニングプログラム作成" style="width: 100%;">
     <p>まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</p>
   </div>
 
-  <div style="text-align: center; width: 30%;">
+  <div style="width: 30%; margin-bottom: 20px; text-align: center;">
     <h3>トレーニングプログラム作成</h3>
-    <img src="assets/画面収録 2024-07-07 13.29.40.gif" alt="トレーニングプログラム作成" style="width: 100%;">
-    <p>まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</p>
-  </div>
-
-  <div style="text-align: center; width: 30%;">
-    <h3>トレーニングプログラム作成</h3>
-    <img src="assets/画面収録 2024-07-07 13.29.40.gif" alt="トレーニングプログラム作成" style="width: 100%;">
+    <img src="assets/プログラム機能.gif" alt="トレーニングプログラム作成" style="width: 100%;">
     <p>まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</p>
   </div>
 
@@ -99,10 +98,6 @@
 | インフラ       | Vercel / Heroku                                                                       |                       |
 | その他         | SWR / shadcn/ui / Radix UI/ GoogleAnalitycs / tailwind CSS
 
-
-## ■ 画面遷移図<br>
-
-Figma：https://www.figma.com/file/nGPYGIh8IXzliZafhJxrzf/PF-3%2F9?type=design&node-id=0%3A1&mode=design&t=vkvG9u5hJ7tX2RlN-1<br>
 
 ## ■ ER図<br>
 https://drive.google.com/file/d/1Ee7QTfIJnDDzuYfnZJH_fcJclKbBpP2r/view?usp=sharing<br>
