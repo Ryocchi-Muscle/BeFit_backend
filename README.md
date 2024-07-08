@@ -32,62 +32,59 @@
 
 ## ■ メイン機能の使い方
 
-<table>
+<table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
   <tr>
-    <th style="text-align: center">プログラム作成</th>
-    <th style="text-align: center">メニュー記録</th>
-    <th style="text-align: center">メニュー編集</th>
+    <th style="text-align: center; width: 33%; border: 1px solid #ccc;">プログラム作成</th>
+    <th style="text-align: center; width: 33%; border: 1px solid #ccc;">メニュー記録</th>
+    <th style="text-align: center; width: 33%; border: 1px solid #ccc;">メニュー編集</th>
   </tr>
   <tr>
-    <td style="text-align: center;">
-      <img src="assets/program.gif" alt="トレーニングプログラム作成" style="width: 100%;"><br>
+    <td style="text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 10px;">
+      <img src="assets/program.gif" alt="トレーニングプログラム作成" style="width: 100%; height: auto;"><br>
       まずは、プログラム作成ボタンを押して、各情報を記入後に作成ボタンを押す。
     </td>
-    <td style="text-align: center;">
-      <img src="assets/menu.gif" alt="メニュー記録" style="width: 100%;"><br>
+    <td style="text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 10px;">
+      <img src="assets/menu.gif" alt="メニュー記録" style="width: 100%; height: auto;"><br>
       まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。
     </td>
-    <td style="text-align: center;">
-      <img src="assets/menu_edit.gif" alt="メニュー編集" style="width: 100%;"><br>
+    <td style="text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 10px;">
+      <img src="assets/menu_edit.gif" alt="メニュー編集" style="width: 100%; height: auto;"><br>
       まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。
     </td>
   </tr>
   <tr>
-    <th style="text-align: center">記録表示</th>
-    <th style="text-align: center">カレンダー機能</th>
-    <th style="text-align: center">解説機能</th>
+    <th style="text-align: center; width: 33%; border: 1px solid #ccc;">記録表示</th>
+    <th style="text-align: center; width: 33%; border: 1px solid #ccc;">カレンダー機能</th>
+    <th style="text-align: center; width: 33%; border: 1px solid #ccc;">解説機能</th>
   </tr>
   <tr>
-    <td style="text-align: center;">
-      <img src="assets/record.gif" alt="記録表示" style="width: 100%;"><br>
+    <td style="text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 10px;">
+      <img src="assets/record.gif" alt="記録表示" style="width: 100%; height: auto;"><br>
       1週間のトレーニングボリュームを棒グラフで表示します。最大8週間分の記録を確認することができ、トレーニングの成長を可視化できます。
     </td>
-    <td style="text-align: center;">
-      <img src="assets/calendar.gif" alt="カレンダー機能" style="width: 100%;"><br>
+    <td style="text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 10px;">
+      <img src="assets/calendar.gif" alt="カレンダー機能" style="width: 100%; height: auto;"><br>
       カレンダーから過去の記録を確認することができます。
     </td>
-    <td style="text-align: center;">
-      <img src="assets/trainingguide.gif" alt="解説機能" style="width: 100%;"><br>
+    <td style="text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 10px;">
+      <img src="assets/trainingguide.gif" alt="解説機能" style="width: 100%; height: auto;"><br>
       初心者でも理解しやすく、対象の筋肉の筋繊維図や、おすすめの動画も載せています。
     </td>
   </tr>
   <tr>
-    <th style="text-align: center">メニュー検索機能</th>
-    <th></th>
-    <th></th>
+    <th style="text-align: center; width: 33%; border: 1px solid #ccc;">メニュー検索機能</th>
+    <th style="text-align: center; width: 33%; border: 1px solid #ccc;"></th>
+    <th style="text-align: center; width: 33%; border: 1px solid #ccc;"></th>
   </tr>
   <tr>
-    <td style="text-align: center;">
-      <img src="assets/traingguie_search.gif" alt="メニュー検索機能" style="width: 100%;"><br>
+    <td style="text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 10px;">
+      <img src="assets/traingguie_search.gif" alt="メニュー検索機能" style="width: 100%; height: auto;"><br>
       解説機能の中でメニューを検索できます。
     </td>
-    <td></td>
-    <td></td>
+    <td style="text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 10px;"></td>
+    <td style="text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 10px;"></td>
   </tr>
 </table>
-
-
-
 
 ## ■ サービスの差別化ポイント
 
