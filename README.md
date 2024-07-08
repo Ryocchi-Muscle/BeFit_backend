@@ -31,7 +31,7 @@
 
 ## ■ メイン機能の使い方
 
-<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around; gap: 20px;">
 
   <div style="width: 30%; margin-bottom: 20px; text-align: center;">
     <h3>プログラム作成</h3>
@@ -54,8 +54,7 @@
   <div style="width: 30%; margin-bottom: 20px; text-align: center;">
     <h3>記録表示</h3>
     <img src="assets/record.gif" alt="メニュー編集" style="width: 100%;">
-    <p>1週間のトレーニングボリュームを棒グラフで表示します。最大8週間分の記録を確認することができ、<br>
-    トレーニングの成長を可視化できます。</p>
+    <p>1週間のトレーニングボリュームを棒グラフで表示します。最大8週間分の記録を確認することができ、<br>トレーニングの成長を可視化できます。</p>
   </div>
 
   <div style="width: 30%; margin-bottom: 20px; text-align: center;">
@@ -67,8 +66,7 @@
   <div style="width: 30%; margin-bottom: 20px; text-align: center;">
     <h3>解説機能</h3>
     <img src="assets/trainingguide.gif" alt="トレーニング解説機能" style="width: 100%;">
-    <p><br>
-    初心者でも理解しやすく、対象の筋肉の筋繊維図や、おすすめの動画も載せています。</p>
+    <p>初心者でも理解しやすく、対象の筋肉の筋繊維図や、おすすめの動画も載せています。</p>
   </div>
 
   <div style="width: 30%; margin-bottom: 20px; text-align: center;">
@@ -78,6 +76,7 @@
   </div>
 
 </div>
+
 
 
 
