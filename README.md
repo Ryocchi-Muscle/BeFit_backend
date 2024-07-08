@@ -30,7 +30,7 @@
 4.週ごとの総重量が記録されるため、週ごとのトレーニング強度の進捗を確認することができます。<br>
 
 ## ■ メイン機能の使い方
-
+<p>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
 
   <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
@@ -74,9 +74,8 @@
     <img src="assets/traingguie_search.gif" alt="トレーニング解説機能" style="width: 100%;">
     <p>解説機能の中でメニューを検索できます。</p>
   </div>
-
 </div>
-
+</p>
 
 
 
