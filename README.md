@@ -37,6 +37,11 @@ https://github.com/Ryocchi-Muscle/fitapp-api/assets/140929302/dc5d0afc-1d24-437c
 
 <div style="display: flex; justify-content: space-around;">
 
+  <div style="width: 30%; margin-bottom: 20px; text-align: center;">
+    <h3>トレーニングプログラム作成</h3>
+    <img src="assets/プログラム機能.gif" alt="トレーニングプログラム作成" style="width: 100%;">
+    <p>まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</p>
+  </div>
   <div style="text-align: center; width: 30%;">
     <h3>トレーニングプログラム作成</h3>
     <img src="assets/画面収録 2024-07-07 13.29.40.gif" alt="トレーニングプログラム作成" style="width: 100%;">
@@ -44,15 +49,9 @@ https://github.com/Ryocchi-Muscle/fitapp-api/assets/140929302/dc5d0afc-1d24-437c
   </div>
 
   <div style="text-align: center; width: 30%;">
-    <h3>旅行スポット追加</h3>
-    <img src="path_to_your_image2.png" alt="旅行スポット追加" style="width: 100%;">
-    <p>次に、スポット追加ボタンを押して、各スポット情報を記入後に追加ボタンを押す。</p>
-  </div>
-
-  <div style="text-align: center; width: 30%;">
-    <h3>旅行プラン公開</h3>
-    <img src="path_to_your_image3.png" alt="旅行プラン公開" style="width: 100%;">
-    <p>最後に、三点リーダーから公開状態の変更ボタンを押して、公開に変更したら完了！</p>
+    <h3>トレーニングプログラム作成</h3>
+    <img src="assets/画面収録 2024-07-07 13.29.40.gif" alt="トレーニングプログラム作成" style="width: 100%;">
+    <p>まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</p>
   </div>
 
 </div>
