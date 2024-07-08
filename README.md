@@ -6,8 +6,6 @@
 
 ## ■ サービス概要
 
-https://github.com/Ryocchi-Muscle/fitapp-api/assets/140929302/dc5d0afc-1d24-437c-99d0-afe65892e6b6
-
 
 筋トレ初心者向けのサポートアプリです。
 <br>
