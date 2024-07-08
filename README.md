@@ -35,7 +35,7 @@
 
   <div style="width: 30%; margin-bottom: 20px; text-align: center;">
     <h3>トレーニングプログラム作成</h3>
-    <img src="assets/プログラム機能.gif" alt="トレーニングプログラム作成" style="width: 100%;">
+    <img src="assets/program.gif" alt="トレーニングプログラム作成" style="width: 100%;">
     <p>まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</p>
   </div>
   <div style="width: 30%; margin-bottom: 20px; text-align: center;">
