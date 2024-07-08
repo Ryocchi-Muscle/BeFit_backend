@@ -35,51 +35,50 @@
 
 <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
 
-  <div style="width: 30%; margin-bottom: 20px; text-align: center;">
+  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
     <h3>プログラム作成</h3>
     <img src="assets/program.gif" alt="トレーニングプログラム作成" style="width: 100%;">
     <p>まずは、プログラム作成ボタンを押して、各情報を記入後に作成ボタンを押す。</p>
   </div>
 
-  <div style="width: 30%; margin-bottom: 20px; text-align: center;">
+  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
     <h3>メニュー記録</h3>
     <img src="assets/menu.gif" alt="メニュー記録" style="width: 100%;">
     <p>まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</p>
   </div>
 
-  <div style="width: 30%; margin-bottom: 20px; text-align: center;">
+  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
     <h3>メニュー編集</h3>
     <img src="assets/menu_edit.gif" alt="メニュー編集" style="width: 100%;">
     <p>まずは、プログラム作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</p>
   </div>
 
-  <div style="width: 30%; margin-bottom: 20px; text-align: center;">
+  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
     <h3>記録表示</h3>
     <img src="assets/record.gif" alt="メニュー編集" style="width: 100%;">
-    <p>1週間のトレーニングボリュームを棒グラフで表示します。最大8週間分の記録を確認することができ、<br>
-    トレーニングの成長を可視化できます。</p>
+    <p>1週間のトレーニングボリュームを棒グラフで表示します。最大8週間分の記録を確認することができ、<br>トレーニングの成長を可視化できます。</p>
   </div>
 
-  <div style="width: 30%; margin-bottom: 20px; text-align: center;">
+  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
     <h3>カレンダー機能</h3>
     <img src="assets/calendar.gif" alt="メニュー編集" style="width: 100%;">
     <p>カレンダーから過去の記録を確認することができます。</p>
   </div>
 
-  <div style="width: 30%; margin-bottom: 20px; text-align: center;">
+  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
     <h3>解説機能</h3>
     <img src="assets/trainingguide.gif" alt="トレーニング解説機能" style="width: 100%;">
-    <p><br>
-    初心者でも理解しやすく、対象の筋肉の筋繊維図や、おすすめの動画も載せています。</p>
+    <p>初心者でも理解しやすく、対象の筋肉の筋繊維図や、おすすめの動画も載せています。</p>
   </div>
 
-  <div style="width: 30%; margin-bottom: 20px; text-align: center;">
+  <div style="width: 28%; margin-bottom: 20px; text-align: center; border: 1px solid #ccc; padding: 10px; box-sizing: border-box; max-width: 28%;">
     <h3>メニュー検索機能</h3>
     <img src="assets/traingguie_search.gif" alt="トレーニング解説機能" style="width: 100%;">
     <p>解説機能の中でメニューを検索できます。</p>
   </div>
 
 </div>
+
 
 
 
