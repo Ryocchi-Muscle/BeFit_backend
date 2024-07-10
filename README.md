@@ -32,7 +32,7 @@
 
 ## ■ メイン機能の使い方
 
-<table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+<table>
   <tr>
     <th style="text-align: center">プログラム作成</th>
     <th style="text-align: center">メニュー記録</th>
@@ -40,7 +40,7 @@
   </tr>
   <tr>
     <td>
-      <img src="assets/program.gif" alt="トレーニングプログラム作成"><br>
+      <img src="assets/program.gif" alt="トレーニングプログラム作成">
       まずは、プログラム作成ボタンを押して、各情報を入力後に作成ボタンを押す。
     </td>
     <td>
@@ -59,15 +59,15 @@
   </tr>
   <tr>
     <td>
-      <img src="assets/record.gif" alt="記録表示" "><br>
-      1週間のトレーニングボリュームを棒グラフで表示します。最大8週間分の記録を確認することができ、トレーニングの成長を可視化できる。
+      <img src="assets/record.gif" alt="記録表示">
+      1週間のトレーニングボリュームを棒グラフで表示します。<br>最大8週間分の記録を確認することができ、トレーニングの成長を可視化できる。
     </td>
     <td>
-      <img src="assets/calendar.gif" alt="カレンダー機能" "><br>
+      <img src="assets/calendar.gif" alt="カレンダー機能">
       カレンダーから過去の記録を確認することができる。
     </td>
     <td>
-      <img src="assets/trainingguide.gif" alt="解説機能" "><br>
+      <img src="assets/trainingguide.gif" alt="解説機能">
       初心者でも理解しやすく、対象の筋肉の筋繊維図や、動画を見ながら学ぶことができる。
     </td>
   </tr>
