@@ -72,18 +72,6 @@
     </td>
   </tr>
   <tr>
-    <th style="text-align: center; width: 33%; border: 1px solid #ccc;">メニュー検索機能</th>
-    <th style="text-align: center; width: 33%; border: 1px solid #ccc;"></th>
-    <th style="text-align: center; width: 33%; border: 1px solid #ccc;"></th>
-  </tr>
-  <tr>
-    <td style="text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 10px;">
-      <img src="assets/traingguie_search.gif" alt="メニュー検索機能" style="width: 100%; height: auto;"><br>
-      解説機能の中でメニューを検索できます。
-    </td>
-    <td style="text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 10px;"></td>
-    <td style="text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 10px;"></td>
-  </tr>
 </table>
 
 ## ■ サービスの差別化ポイント
