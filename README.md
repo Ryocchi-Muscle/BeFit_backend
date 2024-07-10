@@ -76,6 +76,19 @@
   <tr>
 </table>
 
+<table>
+  <tr>
+     <th style="text-align: center">旅行プラン作成</th>
+    <th style="text-align: center">旅行スポット追加</th>
+    <th style="text-align: center">旅行プラン公開</th>
+  </tr>
+  <tr>
+    <td><img src="assets/program.gif" alt="旅行プラン作成" />まずは、旅行プラン作成ボタンを押して、各旅行情報を記入後に作成ボタンを押す。</td>
+    <td><img src="assets/program.gif" alt="旅行スポット追加" />次に、スポット追加ボタンを押して、各スポット情報を記入後に追加ボタンを押す。</td>
+    <td><img src="assets/program.gif" alt="旅行プラン公開" />最後に、三点リーダーから公開状態の変更ボタンを押して、公開に変更したら完了！</td>
+  </tr>
+</table>
+
 ## ■ サービスの差別化ポイント
 
 **① プログラム内容のシンプルさ。**<br>
