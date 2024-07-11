@@ -62,7 +62,7 @@
   <tr>
     <td>
       <img src="assets/record.gif" alt="記録表示">
-      1週間のトレーニングボリュームを棒グラフで表示します。<br>最大8週間分の記録を確認することができ、トレーニングの成長を可視化できる。
+      1週間のトレーニングボリュームを棒グラフで表示。<br>最大8週間分の記録を確認することができ、トレーニングの成長を可視化できる。
     </td>
     <td>
       <img src="assets/calendar.gif" alt="カレンダー機能">
@@ -123,3 +123,100 @@
 
 ## ■ ER図<br>
 https://drive.google.com/file/d/1Ee7QTfIJnDDzuYfnZJH_fcJclKbBpP2r/view?usp=sharing<br>
+
+
+## ■ER図
+```mermaid
+erDiagram
+Users ||--|| Profiles : has
+Users ||--o{ FavoriteCosmetics : favorites
+Users ||--o{ Reviews : creates
+Users ||--o{ CosmeticUsage : has
+FavoriteCosmetics ||--o{ Reviews : has
+Reviews ||--o{ ReviewTags : has
+Tags ||--o{ ReviewTags : has
+
+Users {
+  bigint id PK
+  string provider "UNIQUE"
+  string uid "UNIQUE"
+  string name
+  string avatar
+  boolean receive_notifications_weather
+  boolean receive_notifications_expiration_date
+  datetime created_at
+  datetime updated_at
+}
+
+Profiles {
+  bigint id PK
+  bigint user_id FK
+  bigint address_id FK
+  string name
+  string skin_type
+  string skin_trouble
+  integer age
+  string avatar
+  string prefecture
+  datetime created_at
+  datetime updated_at
+}
+
+Addresses {
+  bigint id PK
+  text address
+  float latitude
+  float longitude
+  datetime created_at
+  datetime updated_at
+}
+
+FavoriteCosmetics {
+  bigint id PK
+  bigint user_id FK
+  string name
+  string price
+  string item_url
+  string image_url
+  string item_code
+  datetime created_at
+  datetime updated_at
+}
+
+CosmeticUsages {
+  bigint id PK
+  bigint user_id FK
+  integer item_type
+  date open_date
+  date expiry_date
+  datetime created_at
+  datetime updated_at
+}
+
+Reviews {
+  bigint id PK
+  bigint user_id FK
+  bigint favorite_cosmetic_id FK
+  integer rating
+  string title
+  text body
+  boolean visibility
+  datetime created_at
+  datetime updated_at
+}
+
+Tags {
+  bigint id PK
+  string tag_name
+  datetime created_at
+  datetime updated_at
+}
+
+ReviewTags {
+  bigint id FK
+  bigint review_id FK
+  bigint tag_id FK
+  datetime created_at
+  datetime updated_at
+}
+```
