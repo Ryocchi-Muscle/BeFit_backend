@@ -128,96 +128,71 @@ https://drive.google.com/file/d/1Ee7QTfIJnDDzuYfnZJH_fcJclKbBpP2r/view?usp=shari
 ## ■ER図
 ```mermaid
 erDiagram
-Users ||--|| Profiles : has
-Users ||--o{ FavoriteCosmetics : favorites
-Users ||--o{ Reviews : creates
-Users ||--o{ CosmeticUsage : has
-FavoriteCosmetics ||--o{ Reviews : has
-Reviews ||--o{ ReviewTags : has
-Tags ||--o{ ReviewTags : has
+users ||--o{ program_bundles : "has many"
+users ||--o{ training_days : "has many"
+program_bundles ||--o{ daily_programs : "has many"
+training_days ||--o{ training_menus : "has many"
+daily_programs ||--o{ training_menus : "has many"
+training_menus ||--o{ training_sets : "has many"
 
-Users {
+users {
   bigint id PK
-  string provider "UNIQUE"
-  string uid "UNIQUE"
+  string uid
   string name
-  string avatar
-  boolean receive_notifications_weather
-  boolean receive_notifications_expiration_date
+  string provider
   datetime created_at
   datetime updated_at
 }
 
-Profiles {
+program_bundles {
+  bigint id PK
+  string gender
+  string frequency
+  datetime created_at
+  datetime updated_at
+  integer duration
+  bigint user_id FK
+}
+
+daily_programs {
+  bigint id PK
+  json details
+  datetime created_at
+  datetime updated_at
+  bigint program_bundle_id FK
+  integer week
+  boolean completed
+  integer day
+  date date
+}
+
+training_days {
   bigint id PK
   bigint user_id FK
-  bigint address_id FK
-  string name
-  string skin_type
-  string skin_trouble
-  integer age
-  string avatar
-  string prefecture
+  date date
   datetime created_at
   datetime updated_at
 }
 
-Addresses {
+training_menus {
   bigint id PK
-  text address
-  float latitude
-  float longitude
+  string body_part
+  string exercise_name
+  bigint training_day_id FK
   datetime created_at
   datetime updated_at
+  string set_info
+  string other
+  bigint daily_program_id FK
 }
 
-FavoriteCosmetics {
+training_sets {
   bigint id PK
-  bigint user_id FK
-  string name
-  string price
-  string item_url
-  string image_url
-  string item_code
+  integer set_number
+  integer weight
+  integer reps
+  boolean completed
   datetime created_at
   datetime updated_at
+  bigint training_menu_id FK
 }
-
-CosmeticUsages {
-  bigint id PK
-  bigint user_id FK
-  integer item_type
-  date open_date
-  date expiry_date
-  datetime created_at
-  datetime updated_at
-}
-
-Reviews {
-  bigint id PK
-  bigint user_id FK
-  bigint favorite_cosmetic_id FK
-  integer rating
-  string title
-  text body
-  boolean visibility
-  datetime created_at
-  datetime updated_at
-}
-
-Tags {
-  bigint id PK
-  string tag_name
-  datetime created_at
-  datetime updated_at
-}
-
-ReviewTags {
-  bigint id FK
-  bigint review_id FK
-  bigint tag_id FK
-  datetime created_at
-  datetime updated_at
-}
-```
-```
