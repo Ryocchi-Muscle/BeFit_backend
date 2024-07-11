@@ -121,9 +121,6 @@
 | その他         | SWR / shadcn/ui / Radix UI/ GoogleAnalitycs / tailwind CSS
 
 
-## ■ ER図<br>
-https://drive.google.com/file/d/1Ee7QTfIJnDDzuYfnZJH_fcJclKbBpP2r/view?usp=sharing<br>
-
 
 ## ■ER図
 ```mermaid
