@@ -141,20 +141,20 @@ users {
 
 program_bundles {
   bigint id PK
+  bigint user_id FK
   string gender
   string frequency
   datetime created_at
   datetime updated_at
   integer duration
-  bigint user_id FK
 }
 
 daily_programs {
   bigint id PK
+  bigint program_bundle_id FK
   json details
   datetime created_at
   datetime updated_at
-  bigint program_bundle_id FK
   integer week
   boolean completed
   integer day
@@ -171,23 +171,24 @@ training_days {
 
 training_menus {
   bigint id PK
+  bigint training_day_id FK
+  bigint daily_program_id FK
   string body_part
   string exercise_name
-  bigint training_day_id FK
   datetime created_at
   datetime updated_at
   string set_info
   string other
-  bigint daily_program_id FK
 }
 
 training_sets {
   bigint id PK
+  bigint training_menu_id FK
   integer set_number
   integer weight
   integer reps
   boolean completed
   datetime created_at
   datetime updated_at
-  bigint training_menu_id FK
 }
+
