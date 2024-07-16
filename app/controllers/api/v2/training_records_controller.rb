@@ -155,9 +155,16 @@ class Api::V2::TrainingRecordsController < ApplicationController
 
     Rails.logger.debug "Checking completion for date: #{date}, program_id: #{program_id}"
 
-    completed = DailyProgram.where(date: date, completed: true).exists?
+    # program_id から user_id を取得
+    program = ProgramBundle.find(program_id)
+    user_id = program.user_id
 
-    Rails.logger.debug "Completion status: #{completed}"
+    completed = DailyProgram.joins(:program_bundle)
+                            .where(program_bundles: { user_id: user_id })
+                            .where(date: date, completed: true)
+                            .exists?
+
+    Rails.logger.debug "Completion status for user_id #{user_id} on date #{date}: #{completed}"
     render json: { isCompleted: completed }
   end
 
