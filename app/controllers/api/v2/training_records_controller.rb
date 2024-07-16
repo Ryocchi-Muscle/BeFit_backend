@@ -24,61 +24,6 @@ class Api::V2::TrainingRecordsController < ApplicationController
     end
   end
 
-  # def create
-  #   ActiveRecord::Base.transaction do
-  #     training_day = TrainingDay.find_or_initialize_by(date: params[:date], user_id: current_user.id)
-  #     training_day.save!
-
-  #     # 存在するメニューIDを取得
-  #     existing_menus_ids = training_day.training_menus.pluck(:id)
-  #     Rails.logger.debug("existing_menus_ids: #{existing_menus_ids}")
-  #     client_menu_ids = params[:menus].map { |menu| menu[:menuId] }
-  #     Rails.logger.debug("client_menu_ids: #{client_menu_ids}")
-
-  #     training_day.training_menus.where(id: existing_menus_ids - client_menu_ids).destroy_all
-
-  #     params[:menus].each do |menu|
-  #       training_menu = training_day.training_menus.find_or_initialize_by(
-  #         exercise_name: menu[:menuName],
-  #         body_part: menu[:body_part],
-  #         daily_program_id: menu[:daily_program_id]
-  #       )
-  #       Rails.logger.debug("training_menu (before save!): #{training_menu.inspect}")
-
-  #       begin
-  #         if training_menu.new_record?
-  #           training_menu.save!
-  #         else
-  #           training_menu.update!(exercise_name: menu[:menuName], body_part: menu[:body_part], daily_program_id: menu[:daily_program_id])
-  #         end
-  #       rescue ActiveRecord::RecordInvalid => e
-  #         Rails.loggerdebug("training_menu.errors: #{e.training_menu.errors.full_messages}")
-  #         raise ActiveRecord::Rollback
-  #       end
-
-  #       Rails.logger.debug("training_menu (after save!): #{training_menu.inspect}")
-
-  #       # 存在するセットIDを取得
-  #       existing_sets = training_menu.training_sets.pluck(:id)
-  #       client_set_ids = menu[:sets].map { |set| set[:setId] }
-
-  #       training_menu.training_sets.where(id: existing_sets - client_set_ids).destroy_all
-
-  #       menu[:sets].each do |set|
-  #         training_set = training_menu.training_sets.find_or_initialize_by(set_number: set[:setNumber])
-  #         training_set.update!(set_number: set[:setNumber], weight: set[:weight], reps: set[:reps], completed: set[:completed])
-  #         training_set.save!
-  #         Rails.logger.debug("training_set (after save!): #{training_set.inspect}")
-  #       end
-  #     end
-
-  #     render json: { status: 'success' }
-  #   rescue ActiveRecord::RecordInvalid => e
-  #     render json: { status: 'error', errors: e.record.errors.full_messages }, status: :unprocessable_entity # 422
-  #     raise ActiveRecord::Rollback
-  #   end
-  # end
-
   # 完了ボタンを押したときの処理
   def update
     Rails.logger.debug("params: #{params.inspect}")
