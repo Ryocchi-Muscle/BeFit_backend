@@ -8,9 +8,16 @@ class DailyProgram < ApplicationRecord
   validate :unique_date_per_program_bundle, if: :date_present?
 
   def unique_date_per_program_bundle
-    return unless DailyProgram.where.not(id: id).where(program_bundle_id: program_bundle_id, date: date).exists?
+     count = DailyProgram.joins(:program_bundle)
+                        .where.not(id: id)
+                        .where(program_bundles: { user_id: program_bundle.user_id })
+                        .where(date: date)
+                        .count
+    Rails.logger.debug("Existing programs count for user_id #{program_bundle.user_id} on date #{date}: #{count}")
 
-    errors.add(:date, "You can only create one daily program per day for this program bundle")
+    if count > 0
+      errors.add(:date, "You can only create one daily program per day for this user")
+    end
   end
 
   private
