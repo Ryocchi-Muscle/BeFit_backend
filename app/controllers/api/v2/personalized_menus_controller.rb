@@ -132,7 +132,6 @@ class Api::V2::PersonalizedMenusController < ApplicationController
           # 更新対象フィールドが空でない場合のみ更新
           training_set.weight = set_detail[:weight] if set_detail[:weight].present?
           training_set.reps = set_detail[:reps] if set_detail[:reps].present?
-          training_set.completed = set_detail[:completed] unless set_detail[:completed].nil?
 
           training_set.save!
           Rails.logger.debug("training_set: #{training_set.inspect}")

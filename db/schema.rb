@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_05_061822) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_16_140202) do
   create_table "daily_programs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.json "details"
     t.datetime "created_at", null: false
@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_05_061822) do
 
   create_table "training_sets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "set_number"
-    t.integer "weight"
+    t.decimal "weight", precision: 5, scale: 2
     t.integer "reps"
     t.boolean "completed"
     t.datetime "created_at", null: false
