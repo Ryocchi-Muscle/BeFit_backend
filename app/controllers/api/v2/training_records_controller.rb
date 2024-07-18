@@ -45,7 +45,6 @@ class Api::V2::TrainingRecordsController < ApplicationController
       params[:menus].each do |menu|
         training_menu = TrainingMenu.find_by(
           exercise_name: menu[:menuName],
-          body_part: menu[:body_part],
           daily_program_id: daily_program_id
         )
 
@@ -59,7 +58,6 @@ class Api::V2::TrainingRecordsController < ApplicationController
         training_menu.update!(
           training_day_id: training_day.id,
           exercise_name: menu[:menuName],
-          body_part: menu[:body_part],
           daily_program_id: daily_program_id
         )
 
@@ -70,7 +68,6 @@ class Api::V2::TrainingRecordsController < ApplicationController
             set_number: set[:setNumber],
             weight: set[:weight],
             reps: set[:reps],
-            completed: set[:completed]
           )
         end
       end

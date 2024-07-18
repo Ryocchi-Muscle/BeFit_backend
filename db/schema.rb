@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_16_140202) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_18_065452) do
   create_table "daily_programs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.json "details"
     t.datetime "created_at", null: false
@@ -43,13 +43,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_16_140202) do
   end
 
   create_table "training_menus", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "body_part"
     t.string "exercise_name"
     t.bigint "training_day_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "set_info"
-    t.string "other"
     t.bigint "daily_program_id", null: false
     t.index ["training_day_id"], name: "index_training_menus_on_training_day_id"
   end
