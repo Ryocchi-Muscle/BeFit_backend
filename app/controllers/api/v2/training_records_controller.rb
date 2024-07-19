@@ -67,7 +67,7 @@ class Api::V2::TrainingRecordsController < ApplicationController
           training_set.update!(
             set_number: set[:setNumber],
             weight: set[:weight],
-            reps: set[:reps],
+            reps: set[:reps]
           )
         end
       end

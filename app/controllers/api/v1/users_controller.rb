@@ -11,6 +11,7 @@ class Api::V1::UsersController < ApplicationController
   rescue StandardError => e
     render json: { error: e.message }, status: :internal_server_error
   end
+
   def destroy
     user = User.find_by(uid: params[:uid])
     if user
@@ -30,7 +31,7 @@ class Api::V1::UsersController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user).permit(:provider, :uid, :name)
-  end
+    def user_params
+      params.require(:user).permit(:provider, :uid, :name)
+    end
 end
