@@ -97,17 +97,18 @@ class Api::V2::TrainingRecordsController < ApplicationController
 
     Rails.logger.debug "Checking completion for date: #{date}, program_id: #{program_id}"
 
-    # program_id から user_id を取得
-    program = ProgramBundle.find(program_id)
-    user_id = program.user_id
-
+    begin
     completed = DailyProgram.joins(:program_bundle)
-                            .where(program_bundles: { user_id: user_id })
+                            .where(program_bundles: { user_id: current_user.id  })
                             .where(date: date, completed: true)
                             .exists?
 
-    Rails.logger.debug "Completion status for user_id #{user_id} on date #{date}: #{completed}"
+    Rails.logger.debug "Completion status for user_id #{current_user.id} on date #{date}: #{completed}"
     render json: { isCompleted: completed }
+    rescue StandardError => e
+      Rails.logger.error "Error checking program completion: #{e.message}"
+      render json: { isCompleted: false }, status: :internal_server_error
+    end
   end
 
   private
