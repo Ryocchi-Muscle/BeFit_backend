@@ -39,5 +39,10 @@ Rspec.describe DailyProgram, type: :model do
     expect(daily_program.errors[:day]).to include("1つのプログラムバンドルに対して作成できるデイリープログラムは1日に1つだけ")
   end
 
+  it '同じprogram_bundle内でユニークな場合は有効であること' do
+    DailyProgram.create!(week: 1, day: 1, date: Date.today, program_bundle: program_bundle)
+    
+  end
+
  end
 end
