@@ -35,14 +35,15 @@ Rspec.describe DailyProgram, type: :model do
  context 'unique_date_per_program_bundleのバリデーション検証' do
   it '同じprogram_bundle内で日付が重複している場合は無効であること' do
     DailyProgram.create!(week: 1, day: 1, date: Date.today, program_bundle: program_bundle)
-    expect(daily_program).not_to be_valid
-    expect(daily_program.errors[:day]).to include("1つのプログラムバンドルに対して作成できるデイリープログラムは1日に1つだけ")
+    duplicate_daily_program = DailyProgram.new(week:1, day: 2, date: Date.today, program_bundle: program_bundle )
+    expect(duplicate_daily_programm).not_to be_valid
+    expect(duplicate_daily_program.errors[:day]).to include("1つのプログラムバンドルに対して作成できるデイリープログラムは1日に1つだけ")
   end
 
   it '同じprogram_bundle内でユニークな場合は有効であること' do
     DailyProgram.create!(week: 1, day: 1, date: Date.today, program_bundle: program_bundle)
-    
+    another_daily_program = DailyProgram.new(week: 1, day: 2, date: Date.tomorrow, program_bundle: program_bundle)
+    expect(another_daily_program).to be_valid
   end
-
  end
 end
