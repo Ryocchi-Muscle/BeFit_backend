@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-Rspec.describe DailyProgram, type: :model do
+RSpec.describe DailyProgram, type: :model do
   let(:program_bundle) { create(:program_bundle) }
 
   it '有効な属性が設定されている場合は有効であること' do
-    daily_program = DailyProgmram.new(week: 1, day: 1, program_bundle: program_bundle)
+    daily_program = DailyProgram.new(week: 1, day: 1, program_bundle: program_bundle)
     expect(daily_program).to be_valid
   end
 
