@@ -11,7 +11,7 @@ RSpec.describe DailyProgram, type: :model do
   it 'weekがnilの場合は無効であること' do
     daily_program = DailyProgram.new(week: nil, day: 1, program_bundle: program_bundle)
     expect(daily_program).not_to be_valid
-    expect(daily_program.errors[:week]).to include("cant't be blank")
+    expect(daily_program.errors[:week]).to include("can't be blank")
   end
 
   it 'dayがnilの場合は無効であること' do
@@ -36,8 +36,8 @@ RSpec.describe DailyProgram, type: :model do
   it '同じprogram_bundle内で日付が重複している場合は無効であること' do
     DailyProgram.create!(week: 1, day: 1, date: Date.today, program_bundle: program_bundle)
     duplicate_daily_program = DailyProgram.new(week:1, day: 2, date: Date.today, program_bundle: program_bundle )
-    expect(duplicate_daily_programm).not_to be_valid
-    expect(duplicate_daily_program.errors[:day]).to include("1つのプログラムバンドルに対して作成できるデイリープログラムは1日に1つだけ")
+    expect(duplicate_daily_program).not_to be_valid
+    expect(duplicate_daily_program.errors[:date]).to include("You can only create one daily program per day for this program bundle")
   end
 
   it '同じprogram_bundle内でユニークな場合は有効であること' do
