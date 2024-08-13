@@ -32,4 +32,14 @@ RSpec.describe TrainingDay, type: :model do
 
     expect { training_day.destroy }.to change { TrainingMenu.count }.by(-1)
   end
+
+   it 'nested attributes for training_menusが正しく保存されること' do
+    training_day = TrainingDay.new(
+      date: Date.today,
+      user: user,
+      training_menus_attributes: [{ name: 'Squat', sets: 3 }]
+    )
+    expect(training_day).to be_valid
+    expect { training_day.save }.to change { TrainingMenu.count }.by(1)
+  end
 end
