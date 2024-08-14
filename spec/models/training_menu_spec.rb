@@ -42,4 +42,15 @@ RSpec.describe TrainingMenu, type: :model do
 
     expect { training_menu.destroy }.to change { TrainingSet.count }.by(-1)
   end
+
+   it 'nested attributes for training_setsが正しく保存されること' do
+    training_menu = TrainingMenu.new(
+      exercise_name: 'Squat',
+      training_day: training_day,
+      daily_program: daily_program,
+      training_sets_attributes: [{ set_info: '3x10' }]
+    )
+    expect(training_menu).to be_valid
+    expect { training_menu.save }.to change { TrainingSet.count }.by(1)
+  end
 end
