@@ -25,4 +25,9 @@ RSpec.describe TrainingMenu, type: :model do
     training_menu = TrainingMenu.new(exercise_name: 'Squat', training_day: nil, daily_program: daily_program)
     expect(training_menu).to be_valid
   end
+
+  it 'training_dayと関連付けられていること' do
+    training_menu = TrainingMenu.new(exercise_name: 'Squat', training_day: training_day, daily_program: daily_program)
+    expect(training_menu.training_day).to eq(training_day)
+  end
 end
