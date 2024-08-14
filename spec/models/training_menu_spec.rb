@@ -20,4 +20,9 @@ RSpec.describe TrainingMenu, type: :model do
     expect(training_menu).not_to be_valid
     expect(training_menu.errors[:training_day]).to include("can't be blank")
   end
+
+  it 'training_dayがnilでもdaily_programが存在する場合は有効であること' do
+    training_menu = TrainingMenu.new(exercise_name: 'Squat', training_day: nil, daily_program: daily_program)
+    expect(training_menu).to be_valid
+  end
 end
