@@ -35,4 +35,11 @@ RSpec.describe TrainingMenu, type: :model do
     training_menu = TrainingMenu.new(exercise_name: 'Squat', training_day: training_day, daily_program: daily_program)
     expect(training_menu.daily_program).to eq(daily_program)
   end
+
+  it 'training_setsが関連付けられており、dependent: :destroyが正しく動作すること' do
+    training_menu = TrainingMenu.create!(exercise_name: 'Squat', training_day: training_day, daily_program: daily_program)
+    training_menu.training_sets.create!(set_info: '3x10')
+
+    expect { training_menu.destroy }.to change { TrainingSet.count }.by(-1)
+  end
 end
