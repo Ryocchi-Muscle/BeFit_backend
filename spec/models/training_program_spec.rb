@@ -14,4 +14,19 @@ RSpec.describe TrainingProgram, type: :model do
       expect(training_program.errors[:user]).to include("must exist")
     end
   end
+
+  describe '関連付けのテスト' do
+    it 'ユーザーと関連付けられていること' do
+      training_program = TrainingProgram.new(user: user)
+      expect(training_program.user).to eq(user)
+    end
+
+    it 'training_menusが関連付けられており、dependent: :destroyが正しく動作すること' do
+      training_program = TrainingProgram.create!(user: user)
+      training_program.training_menus.create!(exercise_name: 'Squat', sets: 3)
+
+      expect { training_program.destroy }.to change { TrainingMenu.count }.by(-1)
+    end
+  end
+
 end
