@@ -1,4 +1,3 @@
-# spec/controllers/api/v2/programs_controller_spec.rb
 require 'rails_helper'
 
 RSpec.describe Api::V2::ProgramsController, type: :controller do
